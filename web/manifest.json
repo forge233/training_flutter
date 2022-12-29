@@ -1,6 +1,6 @@
 {
-    "name": "textfield_task",
-    "short_name": "textfield_task",
+    "name": "textfield_controller",
+    "short_name": "textfield_controller",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
