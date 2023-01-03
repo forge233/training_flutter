@@ -9,7 +9,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   String viewText = '';
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,13 +33,13 @@ class _HomePageState extends State<HomePage> {
                     border: UnderlineInputBorder(
                       borderSide: BorderSide(width: 10.0),
                     ),
-                    labelText: 'Введите текст'),
+                    labelText: 'Введите текст'),///TODO запятая
               ),
             ),
           ),
           Text(
             'Ваш текст - $viewText',
-            style: const TextStyle(color: Colors.black, fontSize: 20.0),
+            style: const TextStyle(color: Colors.black, fontSize: 20.0),///TODO запятая
           )
         ],
       ),
