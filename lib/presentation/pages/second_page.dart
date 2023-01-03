@@ -26,21 +26,25 @@ class _HomePageState extends State<HomePage> {
                 onSubmitted: (text) {
                   setState(
                     () {
-                     viewText = text;
+                      viewText = text;
                     },
                   );
                 },
                 decoration: const InputDecoration(
-                    border: UnderlineInputBorder(
-                      borderSide: BorderSide(width: 10.0),
-                    ),
-                    labelText: 'Введите текст'),///TODO Запятая
+                  border: UnderlineInputBorder(
+                    borderSide: BorderSide(width: 10.0),
+                  ),
+                  labelText: 'Введите текст',
+                ),
               ),
             ),
           ),
           Text(
             'Ваш текст - $viewText',
-            style: const TextStyle(color: Colors.black, fontSize: 20.0),///TODO Запятая
+            style: const TextStyle(
+              color: Colors.black,
+              fontSize: 20.0,
+            ),
           )
         ],
       ),
