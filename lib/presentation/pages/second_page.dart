@@ -9,6 +9,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   String viewText = '';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,21 +26,25 @@ class _HomePageState extends State<HomePage> {
                 onSubmitted: (text) {
                   setState(
                     () {
-                     viewText = text;
+                      viewText = text;
                     },
                   );
                 },
                 decoration: const InputDecoration(
-                    border: UnderlineInputBorder(
-                      borderSide: BorderSide(width: 10.0),
-                    ),
-                    labelText: 'Введите текст'),///TODO запятая
+                  border: UnderlineInputBorder(
+                    borderSide: BorderSide(width: 10.0),
+                  ),
+                  labelText: 'Введите текст',
+                ),
+
               ),
             ),
           ),
           Text(
             'Ваш текст - $viewText',
-            style: const TextStyle(color: Colors.black, fontSize: 20.0),///TODO запятая
+            style: const TextStyle(color: Colors.black, fontSize: 20.0),
+
+            ///TODO запятая
           )
         ],
       ),
