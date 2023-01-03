@@ -11,20 +11,20 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   TextEditingController controller = TextEditingController();
 
-  String inputText = '';
+  String inputText = '';///TODO не нужна
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text('TextField Controller'),
+        title: Text('TextField Controller'), ///TODO должен быть конст
       ),
       body: Column(
         children: [
           Center(
             child: Padding(
-              padding: EdgeInsets.all(16.0),
+              padding: EdgeInsets.all(16.0),///TODO должен быть конст
               child: TextField(
                 controller: controller,
                 keyboardType: TextInputType.number,
@@ -34,7 +34,7 @@ class _HomePageState extends State<HomePage> {
                 onSubmitted: (text) {
                   setState(
                     () {
-                      inputText = text;
+                      inputText = text;///TODO используя контролер тебе не нужна єта переменная она уже есть в контроллере controller.text
                     },
                   );
                 },
@@ -42,8 +42,8 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           Text(
-            'Number - $inputText',
-            style: const TextStyle(color: Colors.black, fontSize: 20.0),
+            'Number - $inputText',///TODO используй контроллер
+            style: const TextStyle(color: Colors.black, fontSize: 20.0),///TODO ,
           ),
         ],
       ),

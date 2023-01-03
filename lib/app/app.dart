@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../presentation/pages/second_page.dart';
-
+///TODO зачем у тебя два application ? Удали один, они одикавые
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
