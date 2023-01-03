@@ -36,15 +36,16 @@ class _HomePageState extends State<HomePage> {
                   ),
                   labelText: 'Введите текст',
                 ),
-
               ),
             ),
           ),
           Text(
             'Ваш текст - $viewText',
-            style: const TextStyle(color: Colors.black, fontSize: 20.0),
+            style: const TextStyle(
+              color: Colors.black,
+              fontSize: 20.0,
+            ),
 
-            ///TODO запятая
           )
         ],
       ),
