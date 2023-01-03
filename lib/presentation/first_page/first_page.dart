@@ -29,6 +29,7 @@ class _HomePageState extends State<HomePage> {
                 inputFormatters: [
                   FilteringTextInputFormatter.digitsOnly,
                 ],
+                ///TODO Он тут не нужен
                 onSubmitted: (text) {
                   setState(
                     () {},
