@@ -2,14 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:forms_task/presentation/navigation/model_arguments/page_arguments.dart';
 import 'package:forms_task/presentation/navigation/routes.dart';
 
-class SecondPage extends StatelessWidget {
+class SecondPage extends StatefulWidget {
   SecondPage({super.key});
 
+  @override
+  State<SecondPage> createState() => _SecondPageState();
+}
+
+class _SecondPageState extends State<SecondPage> {
+  bool _obscureText = true;
   final TextEditingController _firstName = TextEditingController();
+
   final TextEditingController _lastName = TextEditingController();
+
   final TextEditingController _nickName = TextEditingController();
+
   final TextEditingController _ageController = TextEditingController();
+
   final TextEditingController _password = TextEditingController();
+
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -100,12 +111,21 @@ class SecondPage extends StatelessWidget {
               ),
               TextFormField(
                 controller: _password,
-                decoration: const InputDecoration(
-                  border: UnderlineInputBorder(),
+                decoration: InputDecoration(
+                  suffixIcon: GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        _obscureText = !_obscureText;
+                      });
+                    },
+                    child: Icon(
+                        _obscureText ? Icons.visibility : Icons.visibility_off),
+                  ),
+                  border: const UnderlineInputBorder(),
                   labelText: 'Придумайте пароль',
                 ),
                 maxLength: 20,
-                obscureText: true,
+                obscureText: _obscureText,
                 validator: (text) {
                   final passValid =
                       RegExp(r'^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$');
@@ -169,14 +189,4 @@ class SecondPage extends StatelessWidget {
       );
     }
   }
-}
-
-class User {
-  final int age;
-
-  User(this.age);
-}
-
-void calc() {
-  User user;
 }

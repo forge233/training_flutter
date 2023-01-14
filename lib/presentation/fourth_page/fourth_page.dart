@@ -17,6 +17,7 @@ class FourthPage extends StatefulWidget {
 
 class _FourthPageState extends State<FourthPage> {
   final _formKey = GlobalKey<FormState>();
+  bool _obscureText = true;
 
   @override
   Widget build(BuildContext context) {
@@ -50,11 +51,21 @@ class _FourthPageState extends State<FourthPage> {
                 },
               ),
               TextFormField(
-                decoration: const InputDecoration(
-                    border: UnderlineInputBorder(),
+                decoration: InputDecoration(
+                    suffixIcon: GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          _obscureText = !_obscureText;
+                        });
+                      },
+                      child: Icon(_obscureText
+                          ? Icons.visibility
+                          : Icons.visibility_off),
+                    ),
+                    border: const UnderlineInputBorder(),
                     labelText: 'Введите пароль'),
                 maxLength: 20,
-                obscureText: true,
+                obscureText: _obscureText,
                 validator: (text) {
                   if (text == null || text.isEmpty) {
                     return 'Поле не может быть пустым';
