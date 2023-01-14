@@ -3,7 +3,7 @@ import 'package:forms_task/presentation/navigation/routes.dart';
 
 import '../navigation/model_arguments/page_arguments.dart';
 
-class ThirdPage extends StatefulWidget {
+class ThirdPage extends StatefulWidget { ///TODO нет смісла в StatefulWidget
   final SecondPageArgument secondPageArgument;
 
   const ThirdPage({
@@ -22,7 +22,7 @@ class _ThirdPageState extends State<ThirdPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Ending Registration',
+          'Ending Registration',///TODO запятая не нужна
         ),
         centerTitle: true,
       ),
@@ -38,14 +38,14 @@ class _ThirdPageState extends State<ThirdPage> {
               ),
             ),
             const SizedBox(
-              height: 20.0,
+              height: 20.0,///TODO запятая не нужна
             ),
             ElevatedButton(
               onPressed: () {
                 Navigator.pushNamed(
                   context,
                   AppRoute.fourthPage,
-                  arguments: SecondPageArgument(
+                  arguments: SecondPageArgument( ///TODO используй просто widget.secondPageArgument
                     nickN: widget.secondPageArgument.nickN,
                     pass: widget.secondPageArgument.pass,
                     firstName: widget.secondPageArgument.firstName,

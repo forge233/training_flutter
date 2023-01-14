@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:forms_task/presentation/navigation/model_arguments/page_arguments.dart';
 
-class FivePage extends StatefulWidget {
+class FivePage extends StatefulWidget {///TODO нет смісла в StatefulWidget
   final SecondPageArgument secondPageArgument;
 
   const FivePage({
@@ -21,7 +21,7 @@ class _FivePageState extends State<FivePage> {
       appBar: AppBar(
         centerTitle: true,
         title: const Text(
-          'Reg. info',
+          'Reg. info',///TODO не нужна запятая
         ),
       ),
       body: Center(
@@ -31,7 +31,7 @@ class _FivePageState extends State<FivePage> {
             const Text(
               'Your info:',
               style: TextStyle(
-                fontSize: 30.0,
+                fontSize: 30.0,///TODO не нужна запятая
               ),
             ),
             Text(

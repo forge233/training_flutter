@@ -21,7 +21,7 @@ class _FourthPageState extends State<FourthPage> {
 
   @override
   Widget build(BuildContext context) {
-    widget.secondPageArgument;
+    widget.secondPageArgument; ///TODO зачем?
     return Scaffold(
       appBar: AppBar(
         title: const Text('Authorization'),
@@ -41,7 +41,7 @@ class _FourthPageState extends State<FourthPage> {
                 ),
                 keyboardType: TextInputType.name,
                 validator: (text) {
-                  final validNickname = RegExp(r'^[^A-z]');
+                  final validNickname = RegExp(r'^[^A-z]'); ///TODO unused
                   if (text == null || text.isEmpty) {
                     return 'Поле не может быть пустым';
                   } else if (widget.secondPageArgument.nickN != text) {
@@ -53,7 +53,7 @@ class _FourthPageState extends State<FourthPage> {
               TextFormField(
                 decoration: InputDecoration(
                     suffixIcon: GestureDetector(
-                      onTap: () {
+                      onTap: () {///TODO если в функции одна строка то ставим fat arrow =>
                         setState(() {
                           _obscureText = !_obscureText;
                         });
@@ -63,7 +63,7 @@ class _FourthPageState extends State<FourthPage> {
                           : Icons.visibility_off),
                     ),
                     border: const UnderlineInputBorder(),
-                    labelText: 'Введите пароль'),
+                    labelText: 'Введите пароль'),///TODO запятая
                 maxLength: 20,
                 obscureText: _obscureText,
                 validator: (text) {
@@ -77,7 +77,7 @@ class _FourthPageState extends State<FourthPage> {
                 },
               ),
               const SizedBox(
-                height: 20.0,
+                height: 20.0,///TODO не нужна запятая
               ),
               ElevatedButton(
                 onPressed: () {

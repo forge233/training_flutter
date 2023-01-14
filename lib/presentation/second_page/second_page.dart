@@ -3,7 +3,7 @@ import 'package:forms_task/presentation/navigation/model_arguments/page_argument
 import 'package:forms_task/presentation/navigation/routes.dart';
 
 class SecondPage extends StatefulWidget {
-  SecondPage({super.key});
+  SecondPage({super.key}); ///TODO конст
 
   @override
   State<SecondPage> createState() => _SecondPageState();
@@ -11,6 +11,9 @@ class SecondPage extends StatefulWidget {
 
 class _SecondPageState extends State<SecondPage> {
   bool _obscureText = true;
+
+
+  ///TODO пробелі не нужни
   final TextEditingController _firstName = TextEditingController();
 
   final TextEditingController _lastName = TextEditingController();
@@ -60,7 +63,7 @@ class _SecondPageState extends State<SecondPage> {
                 controller: _firstName,
                 decoration: const InputDecoration(
                     border: UnderlineInputBorder(),
-                    labelText: 'Введите свое имя'),
+                    labelText: 'Введите свое имя'),///TODO запятая
                 keyboardType: TextInputType.name,
                 validator: (text) {
                   final validName = RegExp(r'^[^А-Яа-яЁё]');
@@ -95,7 +98,7 @@ class _SecondPageState extends State<SecondPage> {
                 controller: _ageController,
                 decoration: const InputDecoration(
                     border: UnderlineInputBorder(),
-                    labelText: 'Введите свой возраст'),
+                    labelText: 'Введите свой возраст'),///TODO запятая
                 keyboardType: TextInputType.number,
                 validator: (value) {
                   final ageValid = RegExp(r'^[^0-9]');
@@ -113,13 +116,13 @@ class _SecondPageState extends State<SecondPage> {
                 controller: _password,
                 decoration: InputDecoration(
                   suffixIcon: GestureDetector(
-                    onTap: () {
+                    onTap: () { ///TODO если в функции одна строка то ставим fat arrow =>
                       setState(() {
                         _obscureText = !_obscureText;
                       });
                     },
                     child: Icon(
-                        _obscureText ? Icons.visibility : Icons.visibility_off),
+                        _obscureText ? Icons.visibility : Icons.visibility_off),///TODO запятая
                   ),
                   border: const UnderlineInputBorder(),
                   labelText: 'Придумайте пароль',
@@ -140,16 +143,16 @@ class _SecondPageState extends State<SecondPage> {
                 },
               ),
               const SizedBox(
-                height: 20.0,
+                height: 20.0,///TODO не нужна запятая
               ),
               ElevatedButton(
-                onPressed: () {
+                onPressed: () {///TODO если в функции одна строка то ставим fat arrow =>
                   _onValidate(context);
                 },
                 child: const Text(
                   'Завершить регистрацию',
                   style: TextStyle(
-                    color: Colors.white,
+                    color: Colors.white,///TODO не нужна запятая
                   ),
                 ),
               )

@@ -10,11 +10,12 @@ class FirstPage extends StatelessWidget {
       appBar: AppBar(
         centerTitle: true,
         title: const Text(
-          'First Page',
+          'First Page', ///TODO Не нужна ,
         ),
       ),
       body: Center(
         child: ElevatedButton(
+          ///TODO если анонимная функция больше 5 строк, выносим в отдельный метод
           onPressed: () {
             Navigator.pushNamed(
               context,
