@@ -107,12 +107,15 @@ class SecondPage extends StatelessWidget {
                 maxLength: 20,
                 obscureText: true,
                 validator: (text) {
+                  final passValid =
+                      RegExp(r'^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$');
                   if (text == null || text.isEmpty) {
                     return 'Поле не может быть пустым';
                   } else if (text.length < 8) {
                     return 'Пароль должен быть не менее 8 символов';
+                  } else if (!passValid.hasMatch(text)) {
+                    return 'Пример пароля P@ssword13!';
                   }
-
                   return null;
                 },
               ),
