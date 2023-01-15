@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:forms_task/presentation/navigation/model_arguments/page_arguments.dart';
 
-import '../navigation/routes.dart';
+import '../../navigation/routes.dart';
 
 class FourthPage extends StatefulWidget {
   final SecondPageArgument secondPageArgument;
@@ -21,7 +21,6 @@ class _FourthPageState extends State<FourthPage> {
 
   @override
   Widget build(BuildContext context) {
-    widget.secondPageArgument; ///TODO зачем?
     return Scaffold(
       appBar: AppBar(
         title: const Text('Authorization'),
@@ -41,7 +40,6 @@ class _FourthPageState extends State<FourthPage> {
                 ),
                 keyboardType: TextInputType.name,
                 validator: (text) {
-                  final validNickname = RegExp(r'^[^A-z]'); ///TODO unused
                   if (text == null || text.isEmpty) {
                     return 'Поле не может быть пустым';
                   } else if (widget.secondPageArgument.nickN != text) {
@@ -52,18 +50,16 @@ class _FourthPageState extends State<FourthPage> {
               ),
               TextFormField(
                 decoration: InputDecoration(
-                    suffixIcon: GestureDetector(
-                      onTap: () {///TODO если в функции одна строка то ставим fat arrow =>
-                        setState(() {
-                          _obscureText = !_obscureText;
-                        });
-                      },
-                      child: Icon(_obscureText
-                          ? Icons.visibility
-                          : Icons.visibility_off),
-                    ),
-                    border: const UnderlineInputBorder(),
-                    labelText: 'Введите пароль'),///TODO запятая
+                  suffixIcon: GestureDetector(
+                    onTap: () {
+                      setState(() => _obscureText = !_obscureText);
+                    },
+                    child: Icon(
+                        _obscureText ? Icons.visibility : Icons.visibility_off),
+                  ),
+                  border: const UnderlineInputBorder(),
+                  labelText: 'Введите пароль',
+                ),
                 maxLength: 20,
                 obscureText: _obscureText,
                 validator: (text) {
@@ -76,9 +72,7 @@ class _FourthPageState extends State<FourthPage> {
                   return null;
                 },
               ),
-              const SizedBox(
-                height: 20.0,///TODO не нужна запятая
-              ),
+              const SizedBox(height: 20.0),
               ElevatedButton(
                 onPressed: () {
                   _onValidateAuth(context);
@@ -107,13 +101,7 @@ class _FourthPageState extends State<FourthPage> {
       Navigator.pushNamed(
         context,
         AppRoute.fivePage,
-        arguments: SecondPageArgument(
-          firstName: widget.secondPageArgument.firstName,
-          lastName: widget.secondPageArgument.lastName,
-          age: widget.secondPageArgument.age,
-          nickN: widget.secondPageArgument.nickN,
-          pass: widget.secondPageArgument.pass,
-        ),
+        arguments: widget.secondPageArgument,
       );
     } else {
       ScaffoldMessenger.of(context).showSnackBar(

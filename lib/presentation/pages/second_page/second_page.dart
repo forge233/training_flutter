@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:forms_task/presentation/navigation/model_arguments/page_arguments.dart';
 import 'package:forms_task/presentation/navigation/routes.dart';
+import 'package:forms_task/presentation/pages/utils/app_validator.dart';
 
 class SecondPage extends StatefulWidget {
-  SecondPage({super.key}); ///TODO конст
+  const SecondPage({super.key});
 
   @override
   State<SecondPage> createState() => _SecondPageState();
@@ -12,18 +13,11 @@ class SecondPage extends StatefulWidget {
 class _SecondPageState extends State<SecondPage> {
   bool _obscureText = true;
 
-
-  ///TODO пробелі не нужни
   final TextEditingController _firstName = TextEditingController();
-
   final TextEditingController _lastName = TextEditingController();
-
   final TextEditingController _nickName = TextEditingController();
-
   final TextEditingController _ageController = TextEditingController();
-
   final TextEditingController _password = TextEditingController();
-
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -48,32 +42,19 @@ class _SecondPageState extends State<SecondPage> {
                 ),
                 keyboardType: TextInputType.name,
                 validator: (text) {
-                  final validNickname = RegExp(r'^[^A-z]');
-                  if (text == null || text.isEmpty) {
-                    return 'Поле не может быть пустым';
-                  } else if (validNickname.hasMatch(text)) {
-                    return 'С заглавном буквы латиницой';
-                  } else if (text.length < 4) {
-                    return 'Не менее 4х символов';
-                  }
+                  AppValidator.validatorForNickName(text);
                   return null;
                 },
               ),
               TextFormField(
                 controller: _firstName,
                 decoration: const InputDecoration(
-                    border: UnderlineInputBorder(),
-                    labelText: 'Введите свое имя'),///TODO запятая
+                  border: UnderlineInputBorder(),
+                  labelText: 'Введите свое имя',
+                ),
                 keyboardType: TextInputType.name,
                 validator: (text) {
-                  final validName = RegExp(r'^[^А-Яа-яЁё]');
-                  if (text == null || text.isEmpty) {
-                    return 'Поле не может быть пустым';
-                  } else if (validName.hasMatch(text)) {
-                    return 'Только кирилица';
-                  } else if (text.length < 4) {
-                    return 'Не менее 4х символов';
-                  }
+                  AppValidator.validatorForFirstName(text);
                   return null;
                 },
               ),
@@ -83,32 +64,19 @@ class _SecondPageState extends State<SecondPage> {
                     border: UnderlineInputBorder(),
                     labelText: 'Введите свою фамилию'),
                 validator: (text) {
-                  final validLastname = RegExp(r'^[^А-Яа-яЁё]');
-                  if (text == null || text.isEmpty) {
-                    return 'Поле не может быть пустым';
-                  } else if (validLastname.hasMatch(text)) {
-                    return 'Только кирилица';
-                  } else if (text.length < 4) {
-                    return 'Не менее 4х символов';
-                  }
+                  AppValidator.validatorForLastName(text);
                   return null;
                 },
               ),
               TextFormField(
                 controller: _ageController,
                 decoration: const InputDecoration(
-                    border: UnderlineInputBorder(),
-                    labelText: 'Введите свой возраст'),///TODO запятая
+                  border: UnderlineInputBorder(),
+                  labelText: 'Введите свой возраст',
+                ),
                 keyboardType: TextInputType.number,
                 validator: (value) {
-                  final ageValid = RegExp(r'^[^0-9]');
-                  if (value == null || value.isEmpty) {
-                    return 'Поле не может быть пустым';
-                  } else if (ageValid.hasMatch(value)) {
-                    return 'Только числа';
-                  } else if (value.length < 2) {
-                    return 'Не более 2х символов';
-                  }
+                  AppValidator.validatorForAge(value);
                   return null;
                 },
               ),
@@ -116,13 +84,12 @@ class _SecondPageState extends State<SecondPage> {
                 controller: _password,
                 decoration: InputDecoration(
                   suffixIcon: GestureDetector(
-                    onTap: () { ///TODO если в функции одна строка то ставим fat arrow =>
-                      setState(() {
-                        _obscureText = !_obscureText;
-                      });
+                    onTap: () {
+                      setState(() => _obscureText = !_obscureText);
                     },
                     child: Icon(
-                        _obscureText ? Icons.visibility : Icons.visibility_off),///TODO запятая
+                      _obscureText ? Icons.visibility : Icons.visibility_off,
+                    ),
                   ),
                   border: const UnderlineInputBorder(),
                   labelText: 'Придумайте пароль',
@@ -130,30 +97,16 @@ class _SecondPageState extends State<SecondPage> {
                 maxLength: 20,
                 obscureText: _obscureText,
                 validator: (text) {
-                  final passValid =
-                      RegExp(r'^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$');
-                  if (text == null || text.isEmpty) {
-                    return 'Поле не может быть пустым';
-                  } else if (text.length < 8) {
-                    return 'Пароль должен быть не менее 8 символов';
-                  } else if (!passValid.hasMatch(text)) {
-                    return 'Пример пароля P@ssword13!';
-                  }
+                  AppValidator.validatorForPassword(text);
                   return null;
                 },
               ),
-              const SizedBox(
-                height: 20.0,///TODO не нужна запятая
-              ),
+              const SizedBox(height: 20.0),
               ElevatedButton(
-                onPressed: () {///TODO если в функции одна строка то ставим fat arrow =>
-                  _onValidate(context);
-                },
+                onPressed: () => _onValidate(context),
                 child: const Text(
                   'Завершить регистрацию',
-                  style: TextStyle(
-                    color: Colors.white,///TODO не нужна запятая
-                  ),
+                  style: TextStyle(color: Colors.white),
                 ),
               )
             ],

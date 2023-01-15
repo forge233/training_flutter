@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:forms_task/presentation/first_page/first_page.dart';
-import 'package:forms_task/presentation/five_page/five_page.dart';
-import 'package:forms_task/presentation/fourth_page/fourth_page.dart';
-import 'package:forms_task/presentation/third_page/third_page.dart';
-import '../second_page/second_page.dart';
+import 'package:forms_task/presentation/pages/third_page/third_page.dart';
+
+import '../pages/first_page/first_page.dart';
+import '../pages/five_page/five_page.dart';
+import '../pages/fourth_page/fourth_page.dart';
+import '../pages/second_page/second_page.dart';
 import 'model_arguments/page_arguments.dart';
 
 class AppRoute {
@@ -22,7 +23,7 @@ class AppRoute {
         );
       case '/secondPage':
         return MaterialPageRoute(
-          builder: (_) => SecondPage(),
+          builder: (_) => const SecondPage(),
         );
       case '/thirdPage':
         return MaterialPageRoute(

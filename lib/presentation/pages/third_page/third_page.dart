@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:forms_task/presentation/navigation/routes.dart';
 
-import '../navigation/model_arguments/page_arguments.dart';
+import '../../navigation/model_arguments/page_arguments.dart';
 
-class ThirdPage extends StatefulWidget { ///TODO нет смісла в StatefulWidget
+class ThirdPage extends StatelessWidget {
   final SecondPageArgument secondPageArgument;
 
   const ThirdPage({
@@ -12,18 +12,11 @@ class ThirdPage extends StatefulWidget { ///TODO нет смісла в Stateful
   });
 
   @override
-  State<ThirdPage> createState() => _ThirdPageState();
-}
-
-class _ThirdPageState extends State<ThirdPage> {
-  @override
   Widget build(BuildContext context) {
-    widget.secondPageArgument;
+    secondPageArgument;
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Ending Registration',///TODO запятая не нужна
-        ),
+        title: const Text('Ending Registration'),
         centerTitle: true,
       ),
       body: Center(
@@ -38,20 +31,14 @@ class _ThirdPageState extends State<ThirdPage> {
               ),
             ),
             const SizedBox(
-              height: 20.0,///TODO запятая не нужна
+              height: 20.0
             ),
             ElevatedButton(
               onPressed: () {
                 Navigator.pushNamed(
                   context,
                   AppRoute.fourthPage,
-                  arguments: SecondPageArgument( ///TODO используй просто widget.secondPageArgument
-                    nickN: widget.secondPageArgument.nickN,
-                    pass: widget.secondPageArgument.pass,
-                    firstName: widget.secondPageArgument.firstName,
-                    lastName: widget.secondPageArgument.lastName,
-                    age: widget.secondPageArgument.age,
-                  ),
+                  arguments: secondPageArgument,
                 );
               },
               child: const Text(
