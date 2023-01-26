@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../presentation/navigation/routes.dart';
+import '../presentation/pages/first_page/first_page.dart';
 
 
 class MyApp extends StatelessWidget {
@@ -8,9 +8,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  const MaterialApp(
-      initialRoute: AppRoute.firstPage,
-      onGenerateRoute: AppRoute.generateRoute,
+    return   const MaterialApp(
+      home: HomePage(),
     );
   }
 }
