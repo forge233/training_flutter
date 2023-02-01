@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:forms_task/application/provider/provide.dart';
+import 'package:provider/provider.dart';
 
 import '../presentation/pages/first_page/first_page.dart';
 
@@ -7,9 +9,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-        return  MaterialApp(
-          debugShowCheckedModeBanner: false,
-          home: WrapTest(),
-        );
-      }
+    return const MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: ChangeBackgroundColor(),
+    );
   }
+}

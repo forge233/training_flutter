@@ -1,210 +1,265 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class WrapTest extends StatefulWidget {
-  const WrapTest({super.key});
+import '../../../application/provider/provide.dart';
+
+class ChangeBackgroundColor extends StatefulWidget {
+  const ChangeBackgroundColor({super.key});
 
   @override
-  State<WrapTest> createState() => _WrapTestState();
+  State<ChangeBackgroundColor> createState() => _ChangeBackgroundColorState();
 }
 
-class _WrapTestState extends State<WrapTest> {
-  int count = 0;
-
+class _ChangeBackgroundColorState extends State<ChangeBackgroundColor> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Wrap'),
-        centerTitle: true,
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              count.toString(),
-              style: const TextStyle(fontSize: 20.0),
+    return ChangeNotifierProvider(
+      create: (context) => Changer(),
+      child: Builder(
+        builder: (BuildContext context) {
+          return Scaffold(
+            backgroundColor: Provider.of<Changer>(context, listen: false).setColor,
+            appBar: AppBar(
+              title: const Text('ChangeBackgroundColor'),
+              centerTitle: true,
             ),
-            Container(
-              width: 200.0,
-              height: 200.0,
-              color: Colors.blueAccent,
-              child: Wrap(
-                runAlignment: WrapAlignment.spaceEvenly,
-                alignment: WrapAlignment.center,
-                spacing: 10.0,
+            body: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  InkWell(
-                    onTap: () {
-                      setState(() {
-                        count++;
-                      });
-                    },
-                    child: Container(
-                      width: 50.0,
-                      height: 50.0,
-                      decoration: BoxDecoration(
-                        color: Colors.deepPurple,
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                      child: const Text(
-                        '+1',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(color: Colors.white),
-                      ),
+                  Container(
+                    width: 400.0,
+                    height: 100.0,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10.0),
+                      color: Colors.blueGrey,
                     ),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      setState(() {
-                        count += 2;
-                      });
-                    },
-                    child: Container(
-                      width: 50.0,
-                      height: 50.0,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10.0),
-                        color: Colors.deepPurple,
-                      ),
-                      child: const Text('+2',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(color: Colors.white)),
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      setState(() {
-                        count += 3;
-                      });
-                    },
-                    child: Container(
-                      width: 50.0,
-                      height: 50.0,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10.0),
-                        color: Colors.deepPurple,
-                      ),
-                      child: const Text('+3',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(color: Colors.white)),
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      setState(() {
-                        count += 4;
-                      });
-                    },
-                    child: Container(
-                      width: 50.0,
-                      height: 50.0,
-                      decoration: BoxDecoration(
-                        color: Colors.deepPurple,
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                      child: const Text('+4',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(color: Colors.white)),
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      setState(() {
-                        count += 5;
-                      });
-                    },
-                    child: Container(
-                      width: 50.0,
-                      height: 50.0,
-                      decoration: BoxDecoration(
-                        color: Colors.deepPurple,
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                      child: const Text('+5',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(color: Colors.white)),
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      setState(() {
-                        count += 100;
-                      });
-                    },
-                    child: Container(
-                      width: 50.0,
-                      height: 50.0,
-                      decoration: BoxDecoration(
-                        color: Colors.deepPurple,
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                      child: const Text('+100',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(color: Colors.white)),
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      setState(() {
-                        setState(() {
-                          count += 1500;
-                        });
-                      });
-                    },
-                    child: Container(
-                      width: 50.0,
-                      height: 50.0,
-                      decoration: BoxDecoration(
-                        color: Colors.deepPurple,
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                      child: const Text('+1500',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(color: Colors.white)),
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      setState(() {
-                        count--;
-                      });
-                    },
-                    child: Container(
-                      width: 50.0,
-                      height: 50.0,
-                      decoration: BoxDecoration(
-                        color: Colors.deepPurple,
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                      child: const Text('-',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(color: Colors.white)),
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      setState(() {
-                        count -= 1000;
-                      });
-                    },
-                    child: Container(
-                      width: 50.0,
-                      height: 50.0,
-                      decoration: BoxDecoration(
-                        color: Colors.deepPurple,
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                      child: const Text('-1000',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(color: Colors.white)),
+                    child: Wrap(
+                      runAlignment: WrapAlignment.center,
+                      alignment: WrapAlignment.center,
+                      spacing: 40.0,
+                      children: [
+                        Material(
+                          color: Colors.grey.withOpacity(0.0),
+                          child: InkWell(
+                            onTap: () {
+                              setState(() {
+                                Provider.of<Changer>(context, listen: false)
+                                    .changeColor(Colors.grey);
+                              });
+                            },
+                            child: Container(
+                              width: 50.0,
+                              height: 50.0,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10.0),
+                                color: Colors.blue,
+                              ),
+                              child: const Center(
+                                child: Text(
+                                  'Blue',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Material(
+                          color: Colors.grey.withOpacity(0.0),
+                          child: InkWell(
+                            onTap: () {
+                              setState(
+                                () {
+                                  Provider.of<Changer>(context, listen: false)
+                                      .changeColor(Colors.redAccent);
+                                },
+                              );
+                            },
+                            child: Container(
+                              width: 50.0,
+                              height: 50.0,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10.0),
+                                color: Colors.redAccent,
+                              ),
+                              child: const Center(
+                                child: Text(
+                                  'Red',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Material(
+                          color: Colors.grey.withOpacity(0.0),
+                          child: InkWell(
+                            onTap: () {
+                              setState(() {
+                                Provider.of<Changer>(context, listen: false)
+                                    .changeColor(Colors.grey);
+                              });
+                            },
+                            child: Container(
+                              width: 50.0,
+                              height: 50.0,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10.0),
+                                color: Colors.grey,
+                              ),
+                              child: const Center(
+                                child: Text(
+                                  'White',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Material(
+                          color: Colors.black.withOpacity(0.0),
+                          child: InkWell(
+                            onTap: () {
+                              setState(() {
+                                Provider.of<Changer>(context, listen: false)
+                                    .changeColor(Colors.deepPurpleAccent);
+                              });
+                            },
+                            child: Container(
+                              width: 50.0,
+                              height: 50.0,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10.0),
+                                color: Colors.deepPurpleAccent,
+                              ),
+                              child: const Center(
+                                child: Text(
+                                  'DeepPurple',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 10.0,
+                        ),
+                        Material(
+                          color: Colors.grey.withOpacity(0.0),
+                          child: InkWell(
+                            onTap: () {
+                              setState(() {
+                                Provider.of<Changer>(context, listen: false)
+                                    .changeColor(Colors.orangeAccent);
+                              });
+                            },
+                            child: Container(
+                              width: 50.0,
+                              height: 50.0,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10.0),
+                                color: Colors.deepOrangeAccent,
+                              ),
+                              child: const Center(
+                                child: Text(
+                                  'Orange',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Material(
+                          color: Colors.grey.withOpacity(0.0),
+                          child: InkWell(
+                            onTap: () {
+                              setState(() {
+                                Provider.of<Changer>(context, listen: false)
+                                    .changeColor(Colors.pinkAccent);
+                              });
+                            },
+                            child: Container(
+                              width: 50.0,
+                              height: 50.0,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10.0),
+                                color: Colors.pinkAccent,
+                              ),
+                              child: const Center(
+                                child: Text(
+                                  'Pink',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Material(
+                          color: Colors.grey.withOpacity(0.0),
+                          child: InkWell(
+                            onTap: () {
+                              setState(() {
+                                Provider.of<Changer>(context, listen: false)
+                                    .changeColor(Colors.black);
+                              });
+                            },
+                            child: Container(
+                              width: 50.0,
+                              height: 50.0,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10.0),
+                                color: Colors.black,
+                              ),
+                              child: const Center(
+                                child: Text(
+                                  'Black',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Material(
+                          color: Colors.grey.withOpacity(0.0),
+                          child: InkWell(
+                            onTap: () {
+                              setState(() {
+                                Provider.of<Changer>(context, listen: false)
+                                    .changeColor(Colors.lightBlue);
+                              });
+                            },
+                            child: Container(
+                              width: 50.0,
+                              height: 50.0,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10.0),
+                                color: Colors.lightBlue,
+                              ),
+                              child: const Center(
+                                child: Text(
+                                  'Light Blue',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ],
               ),
             ),
-          ],
-        ),
+          );
+        },
       ),
     );
   }
