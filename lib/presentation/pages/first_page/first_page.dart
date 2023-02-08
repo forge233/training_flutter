@@ -1,266 +1,133 @@
 import 'package:flutter/material.dart';
+import 'package:forms_task/application/provider/provide.dart';
+import 'package:forms_task/presentation/utils/validator.dart';
 import 'package:provider/provider.dart';
 
-import '../../../application/provider/provide.dart';
-
-class ChangeBackgroundColor extends StatefulWidget {
-  const ChangeBackgroundColor({super.key});
+class Calculator extends StatefulWidget {
+  const Calculator({super.key});
 
   @override
-  State<ChangeBackgroundColor> createState() => _ChangeBackgroundColorState();
+  State<Calculator> createState() => _CalculatorState();
 }
 
-class _ChangeBackgroundColorState extends State<ChangeBackgroundColor> {
+class _CalculatorState extends State<Calculator> {
+  final TextEditingController valueOne = TextEditingController();
+  final TextEditingController valueTwo = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => Changer(),
-      child: Builder(
-        builder: (BuildContext context) {
-          return Scaffold(
-            backgroundColor: Provider.of<Changer>(context, listen: false).setColor,
-            appBar: AppBar(
-              title: const Text('ChangeBackgroundColor'),
-              centerTitle: true,
-            ),
-            body: Center(
-              child: Column(
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Calculator'),
+        centerTitle: true,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 32.0),
+        child: Form(
+          key: _formKey,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              TextFormField(
+                controller: valueOne,
+                decoration: const InputDecoration(
+                    border: UnderlineInputBorder(),
+                    labelText: 'Введите число 1'),
+                keyboardType: TextInputType.number,
+                validator: CheckValue.validatorForValue,
+              ),
+              const SizedBox(
+                height: 10.0,
+              ),
+              TextFormField(
+                controller: valueTwo,
+                decoration: const InputDecoration(
+                    border: UnderlineInputBorder(),
+                    labelText: 'Введите число 2'),
+                keyboardType: TextInputType.number,
+                validator: CheckValue.validatorForValue,
+              ),
+              const SizedBox(
+                height: 10.0,
+              ),
+              Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Container(
-                    width: 400.0,
-                    height: 100.0,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.0),
-                      color: Colors.blueGrey,
-                    ),
-                    child: Wrap(
-                      runAlignment: WrapAlignment.center,
-                      alignment: WrapAlignment.center,
-                      spacing: 40.0,
-                      children: [
-                        Material(
-                          color: Colors.grey.withOpacity(0.0),
-                          child: InkWell(
-                            onTap: () {
-                              setState(() {
-                                Provider.of<Changer>(context, listen: false)
-                                    .changeColor(Colors.grey);
-                              });
-                            },
-                            child: Container(
-                              width: 50.0,
-                              height: 50.0,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10.0),
-                                color: Colors.blue,
-                              ),
-                              child: const Center(
-                                child: Text(
-                                  'Blue',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        Material(
-                          color: Colors.grey.withOpacity(0.0),
-                          child: InkWell(
-                            onTap: () {
-                              setState(
-                                () {
-                                  Provider.of<Changer>(context, listen: false)
-                                      .changeColor(Colors.redAccent);
-                                },
-                              );
-                            },
-                            child: Container(
-                              width: 50.0,
-                              height: 50.0,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10.0),
-                                color: Colors.redAccent,
-                              ),
-                              child: const Center(
-                                child: Text(
-                                  'Red',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        Material(
-                          color: Colors.grey.withOpacity(0.0),
-                          child: InkWell(
-                            onTap: () {
-                              setState(() {
-                                Provider.of<Changer>(context, listen: false)
-                                    .changeColor(Colors.grey);
-                              });
-                            },
-                            child: Container(
-                              width: 50.0,
-                              height: 50.0,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10.0),
-                                color: Colors.grey,
-                              ),
-                              child: const Center(
-                                child: Text(
-                                  'White',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        Material(
-                          color: Colors.black.withOpacity(0.0),
-                          child: InkWell(
-                            onTap: () {
-                              setState(() {
-                                Provider.of<Changer>(context, listen: false)
-                                    .changeColor(Colors.deepPurpleAccent);
-                              });
-                            },
-                            child: Container(
-                              width: 50.0,
-                              height: 50.0,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10.0),
-                                color: Colors.deepPurpleAccent,
-                              ),
-                              child: const Center(
-                                child: Text(
-                                  'DeepPurple',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 10.0,
-                        ),
-                        Material(
-                          color: Colors.grey.withOpacity(0.0),
-                          child: InkWell(
-                            onTap: () {
-                              setState(() {
-                                Provider.of<Changer>(context, listen: false)
-                                    .changeColor(Colors.orangeAccent);
-                              });
-                            },
-                            child: Container(
-                              width: 50.0,
-                              height: 50.0,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10.0),
-                                color: Colors.deepOrangeAccent,
-                              ),
-                              child: const Center(
-                                child: Text(
-                                  'Orange',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        Material(
-                          color: Colors.grey.withOpacity(0.0),
-                          child: InkWell(
-                            onTap: () {
-                              setState(() {
-                                Provider.of<Changer>(context, listen: false)
-                                    .changeColor(Colors.pinkAccent);
-                              });
-                            },
-                            child: Container(
-                              width: 50.0,
-                              height: 50.0,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10.0),
-                                color: Colors.pinkAccent,
-                              ),
-                              child: const Center(
-                                child: Text(
-                                  'Pink',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        Material(
-                          color: Colors.grey.withOpacity(0.0),
-                          child: InkWell(
-                            onTap: () {
-                              setState(() {
-                                Provider.of<Changer>(context, listen: false)
-                                    .changeColor(Colors.black);
-                              });
-                            },
-                            child: Container(
-                              width: 50.0,
-                              height: 50.0,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10.0),
-                                color: Colors.black,
-                              ),
-                              child: const Center(
-                                child: Text(
-                                  'Black',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        Material(
-                          color: Colors.grey.withOpacity(0.0),
-                          child: InkWell(
-                            onTap: () {
-                              setState(() {
-                                Provider.of<Changer>(context, listen: false)
-                                    .changeColor(Colors.lightBlue);
-                              });
-                            },
-                            child: Container(
-                              width: 50.0,
-                              height: 50.0,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10.0),
-                                color: Colors.lightBlue,
-                              ),
-                              child: const Center(
-                                child: Text(
-                                  'Light Blue',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ElevatedButton(
+                        onPressed: () {
+                          _onValidate(context);
+                          Provider.of<CalculatorProvider>(context,
+                                  listen: false)
+                              .minus(valueOne.text, valueTwo.text);
+                        },
+                        child: const Text('-')),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ElevatedButton(
+                        onPressed: () {
+                          _onValidate(context);
+                          Provider.of<CalculatorProvider>(context,
+                                  listen: false)
+                              .plus(valueOne.text, valueTwo.text);
+                        },
+                        child: const Text('+')),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ElevatedButton(
+                        onPressed: () {
+                          _onValidate(context);
+                          Provider.of<CalculatorProvider>(context,
+                                  listen: false)
+                              .multiplication(valueOne.text, valueTwo.text);
+                        },
+                        child: const Text('/')),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ElevatedButton(
+                        onPressed: () {
+                          _onValidate(context);
+                          Provider.of<CalculatorProvider>(context,
+                                  listen: false)
+                              .division(valueOne.text, valueTwo.text);
+                        },
+                        child: const Text('*')),
                   ),
                 ],
               ),
-            ),
-          );
-        },
+              Text(
+                Provider.of<CalculatorProvider>(context).getResult.toString(),
+                style: const TextStyle(
+                    fontSize: 20.0, fontWeight: FontWeight.w600),
+              ),
+            ],
+          ),
+        ),
       ),
     );
+  }
+
+  _onValidate(BuildContext context) {
+    final valid = _formKey.currentState!.validate();
+    if (valid) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Успешно'),
+          backgroundColor: Colors.green,
+        ),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Неуспешно!'),
+          backgroundColor: Colors.red,
+        ),
+      );
+    }
   }
 }
