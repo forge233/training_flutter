@@ -1,28 +1,44 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
+class Counter with ChangeNotifier {
+  int goodValue = 0;
 
-class CalculatorProvider with ChangeNotifier {
-   double _result = 0.0;
+  int get getGood => goodValue;
+  int neutralValue = 0;
 
-  double get getResult => _result;
+  int get getNeutral => neutralValue;
+  int badValue = 0;
 
-  void minus(String valueOne, String valueTwo) {
-    _result = double.parse(valueOne) - double.parse(valueTwo);
+  int get getBad => badValue;
+  int totalValue = 0;
+
+  int get getTotal => totalValue;
+  double percentageValue = 0;
+
+  double get getPercent => percentageValue;
+
+  void good() {
+    goodValue++;
     notifyListeners();
   }
 
-  void plus(String valueOne, String valueTwo) {
-    _result = double.parse(valueOne) + double.parse(valueTwo);
+  void netural() {
+    neutralValue++;
     notifyListeners();
   }
 
-  void division(String valueOne, String valueTwo) {
-    _result = double.parse(valueOne) * double.parse(valueTwo);
+  void bad() {
+    badValue++;
     notifyListeners();
   }
 
-  void multiplication(String valueOne, String valueTwo) {
-    _result = double.parse(valueOne) / double.parse(valueTwo);
+  void total() {
+    totalValue = goodValue + neutralValue + badValue;
+    notifyListeners();
+  }
+
+  void percentage() {
+    percentageValue = goodValue + neutralValue / totalValue * 100;
     notifyListeners();
   }
 }
