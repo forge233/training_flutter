@@ -1,48 +1,48 @@
 import 'package:flutter/material.dart';
 
 class ProviderCounter with ChangeNotifier {
-  int goodValue = 0;
+  int goodCountFeedback = 0;
 
-  int neutralValue = 0;
-  int badValue = 0;
+  int neutralCountFeedback = 0;
+  int badCountFeedback = 0;
 
-  int totalValue = 0;
+  int totalCountFeedback = 0;
 
-  double percentageValue = 0;
+  double percentageCountFeedback = 0;
 
-  int get getGood => goodValue;
+  int get getGood => goodCountFeedback;
 
-  int get getNeutral => neutralValue;
+  int get getNeutral => neutralCountFeedback;
 
-  int get getBad => badValue;
+  int get getBad => badCountFeedback;
 
-  int get getTotal => totalValue;
+  int get getTotal => totalCountFeedback;
 
-  double get getPercent => percentageValue;
+  double get getPercent => percentageCountFeedback;
 
   void good() {
-    goodValue++;
+    goodCountFeedback++;
 
     notifyListeners();
   }
 
   void netural() {
-    neutralValue++;
+    neutralCountFeedback++;
     notifyListeners();
   }
 
   void bad() {
-    badValue++;
+    badCountFeedback++;
     notifyListeners();
   }
 
   void total() {
-    totalValue = goodValue + neutralValue + badValue;
+    totalCountFeedback = goodCountFeedback + neutralCountFeedback + badCountFeedback;
     notifyListeners();
   }
 
   void percentage() {
-    percentageValue = goodValue + neutralValue / totalValue * 100;
+    percentageCountFeedback = goodCountFeedback + neutralCountFeedback / totalCountFeedback * 100;
     notifyListeners();
   }
 }
