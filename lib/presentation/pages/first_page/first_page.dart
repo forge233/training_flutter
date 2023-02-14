@@ -43,7 +43,7 @@ class _ChangeBackgroundColorState extends State<ChangeBackgroundColor> {
                           color: Colors.grey.withOpacity(0.0),
                           child: InkWell(
                             onTap: () {
-                              setState(() {
+                              setState(() { ///TODO setState тут не потрібен, бо ми використовуємо тут провайдер
                                 Provider.of<Changer>(context, listen: false)
                                     .changeColor(Colors.grey);
                               });
@@ -69,7 +69,7 @@ class _ChangeBackgroundColorState extends State<ChangeBackgroundColor> {
                           color: Colors.grey.withOpacity(0.0),
                           child: InkWell(
                             onTap: () {
-                              setState(
+                              setState(///TODO setState тут не потрібен, бо ми використовуємо тут провайдер
                                 () {
                                   Provider.of<Changer>(context, listen: false)
                                       .changeColor(Colors.redAccent);
@@ -97,7 +97,7 @@ class _ChangeBackgroundColorState extends State<ChangeBackgroundColor> {
                           color: Colors.grey.withOpacity(0.0),
                           child: InkWell(
                             onTap: () {
-                              setState(() {
+                              setState(() {///TODO setState тут не потрібен, бо ми використовуємо тут провайдер
                                 Provider.of<Changer>(context, listen: false)
                                     .changeColor(Colors.grey);
                               });
@@ -119,11 +119,11 @@ class _ChangeBackgroundColorState extends State<ChangeBackgroundColor> {
                             ),
                           ),
                         ),
-                        Material(
+                        Material( ///TODO винеси кнопку в окремий віджет це дозволить оптимізувати код  https://www.digitalocean.com/community/tutorials/what-is-dry-development
                           color: Colors.black.withOpacity(0.0),
                           child: InkWell(
                             onTap: () {
-                              setState(() {
+                              setState(() {///TODO setState тут не потрібен, бо ми використовуємо тут провайдер
                                 Provider.of<Changer>(context, listen: false)
                                     .changeColor(Colors.deepPurpleAccent);
                               });
@@ -146,13 +146,13 @@ class _ChangeBackgroundColorState extends State<ChangeBackgroundColor> {
                           ),
                         ),
                         const SizedBox(
-                          width: 10.0,
+                          width: 10.0, ///TODO не потрібна ,
                         ),
                         Material(
                           color: Colors.grey.withOpacity(0.0),
                           child: InkWell(
                             onTap: () {
-                              setState(() {
+                              setState(() {///TODO setState тут не потрібен, бо ми використовуємо тут провайдер
                                 Provider.of<Changer>(context, listen: false)
                                     .changeColor(Colors.orangeAccent);
                               });
@@ -178,7 +178,7 @@ class _ChangeBackgroundColorState extends State<ChangeBackgroundColor> {
                           color: Colors.grey.withOpacity(0.0),
                           child: InkWell(
                             onTap: () {
-                              setState(() {
+                              setState(() {///TODO setState тут не потрібен, бо ми використовуємо тут провайдер
                                 Provider.of<Changer>(context, listen: false)
                                     .changeColor(Colors.pinkAccent);
                               });
@@ -204,7 +204,7 @@ class _ChangeBackgroundColorState extends State<ChangeBackgroundColor> {
                           color: Colors.grey.withOpacity(0.0),
                           child: InkWell(
                             onTap: () {
-                              setState(() {
+                              setState(() {///TODO setState тут не потрібен, бо ми використовуємо тут провайдер
                                 Provider.of<Changer>(context, listen: false)
                                     .changeColor(Colors.black);
                               });
@@ -230,7 +230,7 @@ class _ChangeBackgroundColorState extends State<ChangeBackgroundColor> {
                           color: Colors.grey.withOpacity(0.0),
                           child: InkWell(
                             onTap: () {
-                              setState(() {
+                              setState(() {///TODO setState тут не потрібен, бо ми використовуємо тут провайдер
                                 Provider.of<Changer>(context, listen: false)
                                     .changeColor(Colors.lightBlue);
                               });
