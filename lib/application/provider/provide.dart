@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 ///TODO ...
 class Counter with ChangeNotifier {
-  int goodValue = 0;///TODO незрозуміла назва
+  int goodValue = 0;///TODO незрозуміла назва, раджу глянути https://youtu.be/5vsfYifNqzk
+
 
   ///TODO спочатку поля классу потім вже гетери класу
   
