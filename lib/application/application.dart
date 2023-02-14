@@ -7,7 +7,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  MaterialApp(///TODO const
+    return  const MaterialApp(
       home: FuturePic(),
     );
   }
