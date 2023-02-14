@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:forms_task/application/provider/provide.dart';
+import 'package:forms_task/application/provider/provider_counter.dart';
 import 'package:forms_task/presentation/pages/feedback_counter/feedback_counter.dart';
 import 'package:provider/provider.dart';
 
@@ -9,7 +9,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (context) => Counter(),
+      create: (context) => ProviderCounter(),
       child: Builder(
         builder: (BuildContext context) {
           return  const MaterialApp(

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:forms_task/application/provider/provide.dart';
+import 'package:forms_task/application/provider/provider_counter.dart';
 import 'package:provider/provider.dart';
+
+import '../../button/feedback_button.dart';
 
 class FeedbackCounter extends StatefulWidget {
   const FeedbackCounter({super.key});
@@ -30,79 +32,57 @@ class _FeedbackCounterState extends State<FeedbackCounter> {
               'Please leave feedback',
               style: TextStyle(fontSize: 30.0),
             ),
-            const SizedBox(
-              height: 10.0, ///TODO ...
-            ),
+            const SizedBox(height: 10.0),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: ElevatedButton(
-                      onPressed: () {
-                        ///TODO винеси в окремий метод
-                        ///TODO для оптимізування можна використовувати такий синтаксис це теж саме
-                        // Provider.of<Counter>(context, listen: false)
-                        // ..good()
-                        // ..total()
-                        // ..percentage();
-
-                        Provider.of<Counter>(context, listen: false).good();
-                        Provider.of<Counter>(context, listen: false).total();
-                        Provider.of<Counter>(context, listen: false)
-                            .percentage();
-                      },
-                      child: const Text('Good')),
-
-                  ///TODO ...
+                  child: FeedbackButton(
+                    text: 'Good',
+                    voteValue:
+                        Provider.of<ProviderCounter>(context, listen: false)
+                            .good,
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: ElevatedButton(
-                      onPressed: () {
-                        ///TODO ...
-                        Provider.of<Counter>(context, listen: false).netural();
-                        Provider.of<Counter>(context, listen: false).total();
-                        Provider.of<Counter>(context, listen: false)
-                            .percentage();
-                      },
-                      child: const Text('Neutral')),
+                  child: FeedbackButton(
+                    text: 'Neutral',
+                    voteValue:
+                        Provider.of<ProviderCounter>(context, listen: false)
+                            .netural,
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: ElevatedButton(
-                      onPressed: () {
-                        ///TODO ...
-                        Provider.of<Counter>(context, listen: false).bad();
-                        Provider.of<Counter>(context, listen: false).total();
-                        Provider.of<Counter>(context, listen: false)
-                            .percentage();
-                      },
-                      child: const Text('Bad')),
+                  child: FeedbackButton(
+                    text: 'Bad',
+                    voteValue:
+                        Provider.of<ProviderCounter>(context, listen: false)
+                            .bad,
+                  ),
                 )
               ],
             ),
-            const SizedBox(
-              height: 10.0,  ///TODO ...
-
-            ),
+            const SizedBox(height: 10.0),
             const Text(
               'Statistics:',
               style: TextStyle(fontSize: 25.0, color: Colors.black),
             ),
-            Text('Good: ${Provider.of<Counter>(context).getGood.toString()}'),
             Text(
-                'Neutral: ${Provider.of<Counter>(context).getNeutral.toString()}'),
-            Text('Bad: ${Provider.of<Counter>(context).getBad.toString()}'),
-            const SizedBox(
-              height: 20.0,///TODO ...
-            ),
+                'Good: ${Provider.of<ProviderCounter>(context).getGood.toString()}'),
             Text(
-              'Total: ${Provider.of<Counter>(context).getTotal.toString()}',
+                'Neutral: ${Provider.of<ProviderCounter>(context).getNeutral.toString()}'),
+            Text(
+                'Bad: ${Provider.of<ProviderCounter>(context).getBad.toString()}'),
+            const SizedBox(height: 20.0),
+            Text(
+              'Total: ${Provider.of<ProviderCounter>(context).getTotal.toString()}',
               style: const TextStyle(fontSize: 20.0),
             ),
             Text(
-              'Percentage: ${Provider.of<Counter>(context).getPercent.toStringAsFixed(2)}%',
+              'Percentage: ${Provider.of<ProviderCounter>(context).getPercent.toStringAsFixed(2)}%',
               style: const TextStyle(fontSize: 20.0),
             )
           ],
