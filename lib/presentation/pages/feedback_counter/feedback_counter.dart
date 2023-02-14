@@ -31,7 +31,7 @@ class _FeedbackCounterState extends State<FeedbackCounter> {
               style: TextStyle(fontSize: 30.0),
             ),
             const SizedBox(
-              height: 10.0,
+              height: 10.0, ///TODO ...
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -40,17 +40,27 @@ class _FeedbackCounterState extends State<FeedbackCounter> {
                   padding: const EdgeInsets.all(8.0),
                   child: ElevatedButton(
                       onPressed: () {
+                        ///TODO винеси в окремий метод
+                        ///TODO для оптимізування можна використовувати такий синтаксис це теж саме
+                        // Provider.of<Counter>(context, listen: false)
+                        // ..good()
+                        // ..total()
+                        // ..percentage();
+
                         Provider.of<Counter>(context, listen: false).good();
                         Provider.of<Counter>(context, listen: false).total();
                         Provider.of<Counter>(context, listen: false)
                             .percentage();
                       },
                       child: const Text('Good')),
+
+                  ///TODO ...
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: ElevatedButton(
                       onPressed: () {
+                        ///TODO ...
                         Provider.of<Counter>(context, listen: false).netural();
                         Provider.of<Counter>(context, listen: false).total();
                         Provider.of<Counter>(context, listen: false)
@@ -62,6 +72,7 @@ class _FeedbackCounterState extends State<FeedbackCounter> {
                   padding: const EdgeInsets.all(8.0),
                   child: ElevatedButton(
                       onPressed: () {
+                        ///TODO ...
                         Provider.of<Counter>(context, listen: false).bad();
                         Provider.of<Counter>(context, listen: false).total();
                         Provider.of<Counter>(context, listen: false)
@@ -72,7 +83,8 @@ class _FeedbackCounterState extends State<FeedbackCounter> {
               ],
             ),
             const SizedBox(
-              height: 10.0,
+              height: 10.0,  ///TODO ...
+
             ),
             const Text(
               'Statistics:',
@@ -83,7 +95,7 @@ class _FeedbackCounterState extends State<FeedbackCounter> {
                 'Neutral: ${Provider.of<Counter>(context).getNeutral.toString()}'),
             Text('Bad: ${Provider.of<Counter>(context).getBad.toString()}'),
             const SizedBox(
-              height: 20.0,
+              height: 20.0,///TODO ...
             ),
             Text(
               'Total: ${Provider.of<Counter>(context).getTotal.toString()}',

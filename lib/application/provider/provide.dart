@@ -1,43 +1,45 @@
 import 'package:flutter/cupertino.dart';
-
+///TODO ...
 class Counter with ChangeNotifier {
-  int goodValue = 0;
+  int goodValue = 0;///TODO незрозуміла назва
 
-  int get getGood => goodValue;
+  ///TODO спочатку поля классу потім вже гетери класу
+  
+  int get getGood => goodValue;///TODO незрозуміла назва
   int neutralValue = 0;
 
-  int get getNeutral => neutralValue;
-  int badValue = 0;
+  int get getNeutral => neutralValue;///TODO незрозуміла назва
+  int badValue = 0;///TODO незрозуміла назва
 
-  int get getBad => badValue;
-  int totalValue = 0;
+  int get getBad => badValue;///TODO незрозуміла назва
+  int totalValue = 0;///TODO незрозуміла назва
 
-  int get getTotal => totalValue;
-  double percentageValue = 0;
+  int get getTotal => totalValue;///TODO незрозуміла назва
+  double percentageValue = 0;///TODO незрозуміла назва
 
-  double get getPercent => percentageValue;
+  double get getPercent => percentageValue;///TODO незрозуміла назва
 
-  void good() {
-    goodValue++;
+  void good() {///TODO незрозуміла назва
+    goodValue++;///TODO незрозуміла назва
     notifyListeners();
   }
 
-  void netural() {
+  void netural() {///TODO незрозуміла назва
     neutralValue++;
     notifyListeners();
   }
 
-  void bad() {
+  void bad() {///TODO незрозуміла назва
     badValue++;
     notifyListeners();
   }
 
-  void total() {
+  void total() {///TODO незрозуміла назва
     totalValue = goodValue + neutralValue + badValue;
     notifyListeners();
   }
 
-  void percentage() {
+  void percentage() {///TODO незрозуміла назва
     percentageValue = goodValue + neutralValue / totalValue * 100;
     notifyListeners();
   }
