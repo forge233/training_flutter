@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:forms_task/application/provider/provide.dart';
-import 'package:provider/provider.dart';
 
 import '../presentation/pages/first_page/first_page.dart';
 
