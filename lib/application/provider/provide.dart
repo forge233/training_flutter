@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-
+///TODO нащо це??
 class Counter with ChangeNotifier {
   int goodValue = 0;
 
