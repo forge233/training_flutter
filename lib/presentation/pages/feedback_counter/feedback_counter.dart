@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:forms_task/application/provider/provider_counter.dart';
 import 'package:provider/provider.dart';
 
-import '../../button/feedback_button.dart';
+import 'feedback_button.dart';
 
 class FeedbackCounter extends StatefulWidget {
   const FeedbackCounter({super.key});
