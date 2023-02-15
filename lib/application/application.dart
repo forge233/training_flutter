@@ -1,22 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:forms_task/application/provider/provider_counter.dart';
-import 'package:forms_task/presentation/pages/feedback_counter/feedback_counter.dart';
-import 'package:provider/provider.dart';
+import 'package:forms_task/presentation/pages/notebook/notebook_homepage.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => ProviderCounter(),
-      child: Builder(
-        builder: (BuildContext context) {
-          return  const MaterialApp(
-            home: FeedbackCounter(),
-          );
-        },
-      ),
+    return  const MaterialApp(
+      home: NoteBook(),
     );
   }
 }

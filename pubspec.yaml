@@ -30,6 +30,7 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   form_validator: ">=0.1.1 <2.0.0"
+  shared_preferences: ^2.0.17
   flutter:
     sdk: flutter
 
