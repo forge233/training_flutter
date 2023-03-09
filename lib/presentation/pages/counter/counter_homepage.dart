@@ -28,13 +28,14 @@ class CounterHomePage extends StatelessWidget {
                 height: 50.0,
                 decoration: BoxDecoration(
                     color: Colors.green,
-                    borderRadius: BorderRadius.circular(10.0)),
+                    borderRadius: BorderRadius.circular(10.0)),///TODO ...
                 child: Center(
                   child: Text(
+                    ///TODO для скорочення запису зроби  final counterProvider = Provider.of<CounterProvider>(context) перед return в методі build і потім counterProvider.incrementCountOne тут
                     Provider.of<CounterProvider>(context)
                         .incrementCountOne
                         .toString(),
-                    style: const TextStyle(color: Colors.white, fontSize: 20.0),
+                    style: const TextStyle(color: Colors.white, fontSize: 20.0),///TODO ...
                   ),
                 ),
               ),
@@ -43,14 +44,14 @@ class CounterHomePage extends StatelessWidget {
                 height: 50.0,
                 decoration: BoxDecoration(
                     color: Colors.green,
-                    borderRadius: BorderRadius.circular(10.0)),
+                    borderRadius: BorderRadius.circular(10.0)),///TODO ...
                 child: Center(
                     child: Text(
                   Provider.of<CounterProvider>(context)
                       .incrementCountTwo
                       .toString(),
-                  style: const TextStyle(color: Colors.white, fontSize: 20.0),
-                )),
+                  style: const TextStyle(color: Colors.white, fontSize: 20.0),///TODO ...
+                )),///TODO ...
               ),
             ],
           ),
@@ -63,10 +64,10 @@ class CounterHomePage extends StatelessWidget {
                   InkWell(
                     onTap: () {
                       if (randomNumber == 0) {
-                        Provider.of<CounterProvider>(context, listen: false)
+                        Provider.of<CounterProvider>(context, listen: false)///TODO ...
                             .plusValueOne();
                       } else {
-                        Provider.of<CounterProvider>(context, listen: false)
+                        Provider.of<CounterProvider>(context, listen: false)///TODO ...
                             .plusValueTwo();
                       }
                     },
@@ -80,7 +81,7 @@ class CounterHomePage extends StatelessWidget {
                       child: const Center(
                         child: Text(
                           'Increment',
-                          style: TextStyle(color: Colors.white, fontSize: 17.0),
+                          style: TextStyle(color: Colors.white, fontSize: 17.0),///TODO ...
                         ),
                       ),
                     ),
@@ -88,10 +89,10 @@ class CounterHomePage extends StatelessWidget {
                   InkWell(
                     onTap: () {
                       if (randomNumber == 0) {
-                        Provider.of<CounterProvider>(context, listen: false)
+                        Provider.of<CounterProvider>(context, listen: false)///TODO ...
                             .minusValueOne();
                       } else {
-                        Provider.of<CounterProvider>(context, listen: false)
+                        Provider.of<CounterProvider>(context, listen: false)///TODO ...
                             .minusValueTwo();
                       }
                     },
@@ -105,14 +106,14 @@ class CounterHomePage extends StatelessWidget {
                       child: const Center(
                         child: Text(
                           'Discernment',
-                          style: TextStyle(color: Colors.white, fontSize: 17.0),
+                          style: TextStyle(color: Colors.white, fontSize: 17.0),///TODO ...
                         ),
                       ),
                     ),
                   ),
                 ],
               )
-            ],
+            ],///TODO Коли ти бачиш такі сходи внизу віджета це вісточка що треба якісь віджети в окремий файл щоб зробити меньше строк
           )
         ],
       ),

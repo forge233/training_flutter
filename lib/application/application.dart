@@ -10,12 +10,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (_) => CounterProvider(),
-      child: Builder(builder: (BuildContext context) {
+      child: Builder(builder: (BuildContext context) {///TODO нащо тут Builder?
         return  MaterialApp(
           debugShowCheckedModeBanner: true,
           home: CounterHomePage(),
         );
-      }),
+      }),///TODO ...
     );
   }
 }
