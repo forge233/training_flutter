@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class Book {
+class Book { ///TODO в presentation створи папку models і перемести туди
   String title;
   String author;
   String publisher;
 
-  Book({required this.title, required this.author, required this.publisher});
+  Book({required this.title, required this.author, required this.publisher});///TODO ...
 }
 
 class BooksListPage extends StatefulWidget {
@@ -41,7 +41,7 @@ class _BooksListPageState extends State<BooksListPage> {
             title: Text(booksList[index].title),
             subtitle: Text(
                 '${booksList[index].author}, ${booksList[index].publisher}'),
-            onTap: () {
+            onTap: () { ///TODO окремий метод
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -53,7 +53,7 @@ class _BooksListPageState extends State<BooksListPage> {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () async {
+        onPressed: () async {///TODO окремий метод
           final result = await Navigator.push(
             context,
             MaterialPageRoute(
@@ -72,7 +72,7 @@ class _BooksListPageState extends State<BooksListPage> {
   }
 }
 
-class BookDetailsPage extends StatelessWidget {
+class BookDetailsPage extends StatelessWidget {///TODO в окремий файл
   final Book book;
 
   const BookDetailsPage({Key? key, required this.book}) : super(key: key);
@@ -97,7 +97,7 @@ class BookDetailsPage extends StatelessWidget {
   }
 }
 
-class AddBookPage extends StatefulWidget {
+class AddBookPage extends StatefulWidget {///TODO в окремий файл
   const AddBookPage({Key? key}) : super(key: key);
 
   @override
@@ -134,7 +134,7 @@ class _AddBookPageState extends State<AddBookPage> {
               TextFormField(
                 controller: _titleController,
                 decoration: const InputDecoration(labelText: 'Назва книги'),
-                validator: (value) {
+                validator: (value) {///TODO зроби класс котрий буде зберігати всі валідації
                   if (value == null || value.isEmpty) {
                     return 'Будь ласка, введіть назву книги';
                   }
@@ -163,7 +163,7 @@ class _AddBookPageState extends State<AddBookPage> {
               ),
               const SizedBox(height: 16.0),
               ElevatedButton(
-                onPressed: () {
+                onPressed: () { ///TODO в окремий метод
                   if (_formKey.currentState!.validate()) {
                     final newBook = Book(
                       title: _titleController.text,
