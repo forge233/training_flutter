@@ -19,7 +19,7 @@ class _ChangeBackgroundColorState extends State<ChangeBackgroundColor> {
         builder: (BuildContext context) {
           return Scaffold(
             backgroundColor:
-                Provider.of<ColorProvider>(context, listen: true).setColor,
+                Provider.of<ColorProvider>(context, listen: true).setColor, ///TODO це не сетер
             appBar: AppBar(
               title: const Text('ChangeBackgroundColor'),
               centerTitle: true,
@@ -43,7 +43,7 @@ class _ChangeBackgroundColorState extends State<ChangeBackgroundColor> {
                         ColorsButton(
                             btnCol: Colors.blue,
                             textButton: 'Blue',
-                            backgroundColorFunc: Colors.blue),
+                            backgroundColorFunc: Colors.blue),///TODO ...
                         ColorsButton(
                           btnCol: Colors.redAccent,
                           textButton: 'Red',
@@ -52,23 +52,23 @@ class _ChangeBackgroundColorState extends State<ChangeBackgroundColor> {
                         ColorsButton(
                             btnCol: Colors.grey,
                             textButton: 'White',
-                            backgroundColorFunc: Colors.grey),
+                            backgroundColorFunc: Colors.grey),///TODO ...
                         ColorsButton(
                             btnCol: Colors.deepPurpleAccent,
                             textButton: 'DeepPurple',
-                            backgroundColorFunc: Colors.deepPurpleAccent),
+                            backgroundColorFunc: Colors.deepPurpleAccent),///TODO ...
                         ColorsButton(
                             btnCol: Colors.orangeAccent,
                             textButton: 'Orange',
-                            backgroundColorFunc: Colors.orangeAccent),
+                            backgroundColorFunc: Colors.orangeAccent),///TODO ...
                         ColorsButton(
                             btnCol: Colors.pinkAccent,
                             textButton: 'Pink Accent',
-                            backgroundColorFunc: Colors.pinkAccent),
+                            backgroundColorFunc: Colors.pinkAccent),///TODO ...
                         ColorsButton(
                             btnCol: Colors.lightBlue,
                             textButton: 'Light Blue',
-                            backgroundColorFunc: Colors.lightBlue),
+                            backgroundColorFunc: Colors.lightBlue),///TODO ...
                       ],
                     ),
                   ),

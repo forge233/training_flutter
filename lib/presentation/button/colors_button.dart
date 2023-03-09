@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../provider/color_provider.dart';
 
-class ColorsButton extends StatefulWidget {
+class ColorsButton extends StatefulWidget {///TODO в first_page
   const ColorsButton(
       {super.key,
       required this.btnCol,
       required this.textButton,
-      required this.backgroundColorFunc});
+      required this.backgroundColorFunc});///TODO ...
 
   final Color btnCol;
   final String textButton;
-  final Color backgroundColorFunc;
+  final Color backgroundColorFunc;///TODO спочатку поля потім конструктор
 
   @override
   State<ColorsButton> createState() => _ColorsButtonState();
