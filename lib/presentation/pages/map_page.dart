@@ -33,15 +33,15 @@ class _MapPageState extends State<MapPage> {
               width: 350.0,
               height: 300.0,
               decoration: BoxDecoration(
-                  color: Colors.red, borderRadius: BorderRadius.circular(10.0)),
+                  color: Colors.red, borderRadius: BorderRadius.circular(10.0)),///TODO ...
               child: Center(
                 child: Text(
                   productList.entries
                       .map((e) => '${e.key}: ${e.value}')
-                      .join('\n'),
+                      .join('\n'),///TODO це ти зробив чи chatGPT?
                   textAlign: TextAlign.center,
                   style: const TextStyle(
-                      fontWeight: FontWeight.w600, fontSize: 32.0),
+                      fontWeight: FontWeight.w600, fontSize: 32.0),///TODO ...
                 ),
               ),
             ),
@@ -50,9 +50,9 @@ class _MapPageState extends State<MapPage> {
               width: 350.0,
               height: 50.0,
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.0), color: Colors.red),
+                  borderRadius: BorderRadius.circular(10.0), color: Colors.red),///TODO ...
               child:
-                  Center(child: Text(getAveragePrice(productList).toString())),
+                  Center(child: Text(getAveragePrice(productList).toString())),///TODO ...
             )
           ],
         ),
