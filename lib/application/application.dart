@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:map_practice/presentation/pages/map_page.dart';
+import 'package:map_practice/presentation/pages/main_page.dart';
 
 
 class App extends StatelessWidget {
@@ -7,8 +7,8 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  MaterialApp(
-      home: BooksListPage(),
+    return  const MaterialApp(
+      home: BookPage(),
     );
   }
 }
