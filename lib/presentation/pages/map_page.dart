@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
 
-class Book { ///TODO в presentation створи папку models і перемести туди
-  String title;
-  String author;
-  String publisher;
-
-  Book({required this.title, required this.author, required this.publisher});///TODO ...
-}
+import '../models/book.dart';
+import 'add_book/add_book.dart';
+import 'detail_page/detail_page.dart';
 
 class BooksListPage extends StatefulWidget {
   const BooksListPage({Key? key}) : super(key: key);
@@ -41,143 +37,39 @@ class _BooksListPageState extends State<BooksListPage> {
             title: Text(booksList[index].title),
             subtitle: Text(
                 '${booksList[index].author}, ${booksList[index].publisher}'),
-            onTap: () { ///TODO окремий метод
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => BookDetailsPage(book: booksList[index]),
-                ),
-              );
+            onTap: () {
+              _navigatorDetails(index);
             },
           );
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () async {///TODO окремий метод
-          final result = await Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const AddBookPage(),
-            ),
-          );
-          if (result != null) {
-            setState(() {
-              booksList.add(result);
-            });
-          }
+        onPressed: () async {
+          _navigatorTapOnButton();
         },
         child: const Icon(Icons.add),
       ),
     );
   }
-}
 
-class BookDetailsPage extends StatelessWidget {///TODO в окремий файл
-  final Book book;
-
-  const BookDetailsPage({Key? key, required this.book}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(book.title),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text('Автор: ${book.author}'),
-            Text('Видавництво: ${book.publisher}'),
-          ],
-        ),
+  Future<void> _navigatorTapOnButton() async {
+    final result = await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const AddBookPage(),
       ),
     );
+    if (result != null) {
+      setState(() {
+        booksList.add(result);
+      });
+    }
   }
-}
-
-class AddBookPage extends StatefulWidget {///TODO в окремий файл
-  const AddBookPage({Key? key}) : super(key: key);
-
-  @override
-  _AddBookPageState createState() => _AddBookPageState();
-}
-
-class _AddBookPageState extends State<AddBookPage> {
-  final _formKey = GlobalKey<FormState>();
-  final _titleController = TextEditingController();
-  final _authorController = TextEditingController();
-  final _publisherController = TextEditingController();
-
-  @override
-  void dispose() {
-    _titleController.dispose();
-    _authorController.dispose();
-    _publisherController.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Додати книгу'),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              TextFormField(
-                controller: _titleController,
-                decoration: const InputDecoration(labelText: 'Назва книги'),
-                validator: (value) {///TODO зроби класс котрий буде зберігати всі валідації
-                  if (value == null || value.isEmpty) {
-                    return 'Будь ласка, введіть назву книги';
-                  }
-                  return null;
-                },
-              ),
-              TextFormField(
-                controller: _authorController,
-                decoration: const InputDecoration(labelText: 'Автор'),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Будь ласка, введіть автора книги';
-                  }
-                  return null;
-                },
-              ),
-              TextFormField(
-                controller: _publisherController,
-                decoration: const InputDecoration(labelText: 'Видавництво'),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Будь ласка, введіть видавництво книги';
-                  }
-                  return null;
-                },
-              ),
-              const SizedBox(height: 16.0),
-              ElevatedButton(
-                onPressed: () { ///TODO в окремий метод
-                  if (_formKey.currentState!.validate()) {
-                    final newBook = Book(
-                      title: _titleController.text,
-                      author: _authorController.text,
-                      publisher: _publisherController.text,
-                    );
-                    Navigator.pop(context, newBook);
-                  }
-                },
-                child: const Text('Додати'),
-              ),
-            ],
-          ),
-        ),
+  void _navigatorDetails(int index){
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => BookDetailsPage(book: booksList[index]),
       ),
     );
   }
