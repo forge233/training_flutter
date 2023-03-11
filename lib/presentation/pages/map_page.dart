@@ -33,7 +33,9 @@ class _MapPageState extends State<MapPage> {
               width: 350.0,
               height: 300.0,
               decoration: BoxDecoration(
-                  color: Colors.red, borderRadius: BorderRadius.circular(10.0)),///TODO ...
+                color: Colors.red,
+                borderRadius: BorderRadius.circular(10.0),
+              ),
               child: Center(
                 child: Text(
                   productList.entries
@@ -41,7 +43,7 @@ class _MapPageState extends State<MapPage> {
                       .join('\n'),
                   textAlign: TextAlign.center,
                   style: const TextStyle(
-                      fontWeight: FontWeight.w600, fontSize: 32.0),///TODO ...
+                      fontWeight: FontWeight.w600, fontSize: 32.0),
                 ),
               ),
             ),
@@ -50,9 +52,10 @@ class _MapPageState extends State<MapPage> {
               width: 350.0,
               height: 50.0,
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.0), color: Colors.red),///TODO ...
-              child:
-                  Center(child: Text(getAveragePrice(productList).toString())),///TODO ...
+                  borderRadius: BorderRadius.circular(10.0), color: Colors.red),
+              child: Center(
+                child: Text(getAveragePrice(productList).toString()),
+              ),
             )
           ],
         ),
