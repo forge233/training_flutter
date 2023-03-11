@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../../application/provider/provider.dart';
+import '../../provider/provider.dart';
 
 class CounterHomePage extends StatelessWidget {
   CounterHomePage({super.key});
@@ -10,6 +10,7 @@ class CounterHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     int randomNumber = Random().nextInt(2);
+    final counterProvider = Provider.of<CounterProvider>(context);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black,
@@ -28,14 +29,13 @@ class CounterHomePage extends StatelessWidget {
                 height: 50.0,
                 decoration: BoxDecoration(
                     color: Colors.green,
-                    borderRadius: BorderRadius.circular(10.0)),///TODO ...
+                    borderRadius: BorderRadius.circular(10.0)),
+
+                ///TODO ...
                 child: Center(
                   child: Text(
-                    ///TODO для скорочення запису зроби  final counterProvider = Provider.of<CounterProvider>(context) перед return в методі build і потім counterProvider.incrementCountOne тут
-                    Provider.of<CounterProvider>(context)
-                        .incrementCountOne
-                        .toString(),
-                    style: const TextStyle(color: Colors.white, fontSize: 20.0),///TODO ...
+                    counterProvider.incrementCountOne.toString(),
+                    style: const TextStyle(color: Colors.white, fontSize: 20.0),
                   ),
                 ),
               ),
@@ -43,15 +43,17 @@ class CounterHomePage extends StatelessWidget {
                 width: 50.0,
                 height: 50.0,
                 decoration: BoxDecoration(
-                    color: Colors.green,
-                    borderRadius: BorderRadius.circular(10.0)),///TODO ...
+                  color: Colors.green,
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
                 child: Center(
-                    child: Text(
-                  Provider.of<CounterProvider>(context)
-                      .incrementCountTwo
-                      .toString(),
-                  style: const TextStyle(color: Colors.white, fontSize: 20.0),///TODO ...
-                )),///TODO ...
+                  child: Text(
+                    Provider.of<CounterProvider>(context)
+                        .incrementCountTwo
+                        .toString(),
+                    style: const TextStyle(color: Colors.white, fontSize: 20.0),
+                  ),
+                ),
               ),
             ],
           ),
@@ -64,11 +66,9 @@ class CounterHomePage extends StatelessWidget {
                   InkWell(
                     onTap: () {
                       if (randomNumber == 0) {
-                        Provider.of<CounterProvider>(context, listen: false)///TODO ...
-                            .plusValueOne();
+                        counterProvider.plusValueOne();
                       } else {
-                        Provider.of<CounterProvider>(context, listen: false)///TODO ...
-                            .plusValueTwo();
+                        counterProvider.plusValueTwo();
                       }
                     },
                     child: Container(
@@ -81,7 +81,7 @@ class CounterHomePage extends StatelessWidget {
                       child: const Center(
                         child: Text(
                           'Increment',
-                          style: TextStyle(color: Colors.white, fontSize: 17.0),///TODO ...
+                          style: TextStyle(color: Colors.white, fontSize: 17.0),
                         ),
                       ),
                     ),
@@ -89,11 +89,9 @@ class CounterHomePage extends StatelessWidget {
                   InkWell(
                     onTap: () {
                       if (randomNumber == 0) {
-                        Provider.of<CounterProvider>(context, listen: false)///TODO ...
-                            .minusValueOne();
+                        counterProvider.minusValueOne();
                       } else {
-                        Provider.of<CounterProvider>(context, listen: false)///TODO ...
-                            .minusValueTwo();
+                        counterProvider.minusValueTwo();
                       }
                     },
                     child: Container(
@@ -106,14 +104,15 @@ class CounterHomePage extends StatelessWidget {
                       child: const Center(
                         child: Text(
                           'Discernment',
-                          style: TextStyle(color: Colors.white, fontSize: 17.0),///TODO ...
+                          style: TextStyle(color: Colors.white, fontSize: 17.0),
                         ),
                       ),
                     ),
                   ),
                 ],
               )
-            ],///TODO Коли ти бачиш такі сходи внизу віджета це вісточка що треба якісь віджети в окремий файл щоб зробити меньше строк
+            ],
+
           )
         ],
       ),

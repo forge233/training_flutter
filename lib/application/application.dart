@@ -3,6 +3,8 @@ import 'package:forms_task/application/provider/provider.dart';
 import 'package:forms_task/presentation/pages/counter/counter_homepage.dart';
 import 'package:provider/provider.dart';
 
+import '../presentation/provider/provider.dart';
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -10,12 +12,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (_) => CounterProvider(),
-      child: Builder(builder: (BuildContext context) {///TODO нащо тут Builder?
-        return  MaterialApp(
-          debugShowCheckedModeBanner: true,
-          home: CounterHomePage(),
-        );
-      }),///TODO ...
+      child: MaterialApp(
+        debugShowCheckedModeBanner: true,
+        home: CounterHomePage(),
+      ),
     );
   }
 }
