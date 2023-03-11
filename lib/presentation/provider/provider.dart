@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 
 class CounterProvider extends ChangeNotifier {
-  int incrementCountOne = 0; ///TODO поля повинні бути приватними
+  int incrementCountOne = 0;
   int incrementCountTwo = 0;
 
   int get getIncrementTwo => incrementCountTwo;
