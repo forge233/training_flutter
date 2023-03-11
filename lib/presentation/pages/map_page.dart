@@ -38,7 +38,7 @@ class _MapPageState extends State<MapPage> {
                 child: Text(
                   productList.entries
                       .map((e) => '${e.key}: ${e.value}')
-                      .join('\n'),///TODO це ти зробив чи chatGPT?
+                      .join('\n'),
                   textAlign: TextAlign.center,
                   style: const TextStyle(
                       fontWeight: FontWeight.w600, fontSize: 32.0),///TODO ...
