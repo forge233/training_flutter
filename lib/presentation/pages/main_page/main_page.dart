@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../application/dot/result.dart';
-import '../../service.dart';
+import '../../../application/dot/result.dart';///TODO тільки повний шлях
+import '../../service.dart';///TODO тільки повний шлях
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -60,7 +60,7 @@ class _MainPageState extends State<MainPage> {
                                 style: const TextStyle(
                                     fontWeight: FontWeight.w500,
                                     fontSize: 18.0,
-                                    color: Colors.white),
+                                    color: Colors.white),///TODO ...
                               ),
                               Text(
                                 item.webPage.webPage,
@@ -68,7 +68,7 @@ class _MainPageState extends State<MainPage> {
                                 style: const TextStyle(
                                     fontWeight: FontWeight.w500,
                                     fontSize: 15,
-                                    color: Colors.white),
+                                    color: Colors.white),///TODO ...
                               ),
                             ],
                           ),
@@ -97,7 +97,7 @@ class _MainPageState extends State<MainPage> {
     final userData = await ServiceJson.fetchDataToDto(country);
     setState(
       () {
-        object = List<Result>.from(userData);
+        object = List<Result>.from(userData);///TODO весь парсінг має бути в сервіс
       },
     );
   }

@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:json_university_practice/application/dot/name.dart';
 import 'package:json_university_practice/application/dot/result.dart';
 import 'package:json_university_practice/application/dot/web_pages.dart';
-import '../application/dot/country.dart';
+import '../application/dot/country.dart';///TODO тільки повний шлях
 
 class ServiceJson {
   static Future<List> fetchDataToDto(String country) async {
