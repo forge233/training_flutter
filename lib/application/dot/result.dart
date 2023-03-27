@@ -8,15 +8,18 @@ class Result {
   final Name name;
   final WebPage webPage;
 
-  const Result(
-      {required this.webPage, required this.country, required this.name});///TODO ЗАпята ctrl alt l
+  const Result({
+    required this.webPage,
+    required this.country,
+    required this.name,
+  });
+
 
   factory Result.fromJson(Map<String, dynamic> json) {
     return Result(
       name: Name.fromJson(json['name']),
       country: Country.fromJson(json['country']),
       webPage: WebPage.fromJson(json['web_pages']),
-      // webPage: WebPage.fromJson(json['web_pages']),///TODO таких фейлів на здачі взагалі не має бути
     );
   }
 }

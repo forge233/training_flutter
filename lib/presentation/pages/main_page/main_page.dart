@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-
-import '../../../application/dot/result.dart';///TODO тільки повний шлях
-import '../../service.dart';///TODO тільки повний шлях
+import 'package:json_university_practice/application/dot/result.dart';
+import 'package:json_university_practice/presentation/service.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -58,17 +57,19 @@ class _MainPageState extends State<MainPage> {
                                 item.name.name,
                                 textAlign: TextAlign.center,
                                 style: const TextStyle(
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 18.0,
-                                    color: Colors.white),///TODO ...
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 18.0,
+                                  color: Colors.white,
+                                ),
                               ),
                               Text(
                                 item.webPage.webPage,
                                 textAlign: TextAlign.center,
                                 style: const TextStyle(
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 15,
-                                    color: Colors.white),///TODO ...
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 15,
+                                  color: Colors.white,
+                                ),
                               ),
                             ],
                           ),
@@ -94,11 +95,8 @@ class _MainPageState extends State<MainPage> {
   }
 
   void fetchToDto(String country) async {
-    final userData = await ServiceJson.fetchDataToDto(country);
-    setState(
-      () {
-        object = List<Result>.from(userData);///TODO весь парсінг має бути в сервіс
-      },
-    );
+    object = await ServiceJson.fetchDataToDto(country);
+    setState(() {
+    });
   }
 }
