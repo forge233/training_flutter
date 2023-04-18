@@ -1,24 +1,22 @@
-import 'package:counter_from_blocprovider/presentation/bloc/color_event.dart';
-import 'package:counter_from_blocprovider/presentation/bloc/color_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'package:counter_from_blocprovider/presentation/bloc/color_event.dart';
+import 'package:counter_from_blocprovider/presentation/bloc/color_state.dart';
 
 class ColorBloc extends Bloc<ColorEvent, ColorState> {
-  ColorBloc() : super(ColorState(Colors.white));
+  ColorBloc() : super(ColorState(Colors.white)) {
+    on<ColorChanged>(colorChangedToState);
+  }
+
+  void colorChangedToState(ColorChanged event, Emitter<ColorState> emit) {
+    emit(state.copyWith(color: event.color));
+  }
 
   @override
   Stream<ColorState> mapEventToState(ColorEvent event) async* {
     if (event is ColorChanged) {
-      final List<Color> colors = [
-        Colors.red,
-        Colors.green,
-        Colors.blue,
-        Colors.yellow,
-        Colors.purple,
-      ];
-      final int currentIndex = colors.indexOf(state.color);
-      yield ColorState(colors[(currentIndex + 1) % colors.length]);
+      yield ColorState(event.color);
     }
   }
 }
