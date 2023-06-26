@@ -4,12 +4,12 @@ import 'package:to_do_list_from_bloc/presentation/bloc/notes_bloc.dart';
 import 'package:to_do_list_from_bloc/presentation/bloc/notes_event.dart';
 import 'package:to_do_list_from_bloc/presentation/navigation/model_arguments/models.dart';
 
-class SecondPage extends StatefulWidget {
+class DetailPage extends StatefulWidget {
   final String noteTitle;
   final String noteContent;
   final String noteId;
 
-  const SecondPage({
+  const DetailPage({
     Key? key,
     required this.noteTitle,
     required this.noteContent,
@@ -17,10 +17,10 @@ class SecondPage extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<SecondPage> createState() => _SecondPageState();
+  State<DetailPage> createState() => _DetailPageState();
 }
 
-class _SecondPageState extends State<SecondPage> {
+class _DetailPageState extends State<DetailPage> {
   late final TextEditingController _titleController;
   late final TextEditingController _contentController;
 

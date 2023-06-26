@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:to_do_list_from_bloc/presentation/pages/first_page/widgets/floatbutton_dialog.dart';
 import 'package:to_do_list_from_bloc/presentation/bloc/notes_bloc.dart';
+import 'package:to_do_list_from_bloc/presentation/pages/home_page/widgets/floatbutton_dialog.dart';
 import 'package:to_do_list_from_bloc/presentation/settings/date.dart';
 import 'package:to_do_list_from_bloc/presentation/navigation/model_arguments/models.dart';
-import 'package:to_do_list_from_bloc/presentation/pages/second_page/second_page.dart';
 import 'package:to_do_list_from_bloc/presentation/bloc/notes_event.dart';
 import 'package:to_do_list_from_bloc/presentation/bloc/notes_state.dart';
+
+import '../detail_page/detail_page.dart';
 
 class ToDoList extends StatefulWidget {
   const ToDoList({Key? key}) : super(key: key);
@@ -141,7 +142,7 @@ class ToDoListState extends State<ToDoList> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => SecondPage(
+        builder: (context) => DetailPage(
           noteTitle: note.title,
           noteContent: note.content,
           noteId: note.noteId,
