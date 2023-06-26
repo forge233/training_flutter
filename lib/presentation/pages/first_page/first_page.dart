@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:uuid/uuid.dart';
+import 'package:to_do_list_from_bloc/presentation/pages/first_page/widgets/floatbutton_dialog.dart';
 import 'package:to_do_list_from_bloc/presentation/bloc/notes_bloc.dart';
 import 'package:to_do_list_from_bloc/presentation/settings/date.dart';
 import 'package:to_do_list_from_bloc/presentation/navigation/model_arguments/models.dart';
@@ -27,9 +27,10 @@ class ToDoListState extends State<ToDoList> {
               title: const Text(
                 'Усі нотатки',
                 style: TextStyle(
-                    fontWeight: FontWeight.w400,
-                    fontSize: 23.0,
-                    color: Colors.black),
+                  fontWeight: FontWeight.w400,
+                  fontSize: 23.0,
+                  color: Colors.black,
+                ),
               ),
               iconTheme: const IconThemeData(color: Colors.black),
               actions: [
@@ -41,9 +42,7 @@ class ToDoListState extends State<ToDoList> {
                   ),
                 ),
                 IconButton(
-                  onPressed: () {
-                    setState(() {});
-                  },
+                  onPressed: () {},
                   icon: const Icon(Icons.picture_as_pdf),
                 ),
                 PopupMenuButton(
@@ -51,12 +50,11 @@ class ToDoListState extends State<ToDoList> {
                     PopupMenuItem(
                       child: ListTile(
                         leading: const Icon(Icons.arrow_downward_outlined),
-                        title: const Text('Sort'),
+                        title: const Text('Sort Date'),
                         onTap: () {
-                          setState(() {
-                            state.notes
-                                .sort((a, b) => a.date.compareTo(b.date));
-                          });
+                          context.read<NoteBloc>().add(
+                                NoteSortDateEvent(),
+                              );
                           Navigator.pop(context);
                         },
                       ),
@@ -64,12 +62,9 @@ class ToDoListState extends State<ToDoList> {
                     PopupMenuItem(
                       child: ListTile(
                         leading: const Icon(Icons.arrow_upward_outlined),
-                        title: const Text('Sort'),
+                        title: const Text('Sort Title'),
                         onTap: () {
-                          setState(() {
-                            state.notes
-                                .sort((a, b) => b.title.compareTo(a.title));
-                          });
+                          context.read<NoteBloc>().add(NoteSortTitleEvent());
                           Navigator.pop(context);
                         },
                       ),
@@ -89,28 +84,7 @@ class ToDoListState extends State<ToDoList> {
               itemBuilder: (context, index) {
                 final note = state.notes[index];
                 return InkWell(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => SecondPage(
-                          noteTitle: note.title,
-                          noteContent: note.content,
-                          noteId: note.noteId,
-                        ),
-                      ),
-                    ).then((updatedNote) {
-                      if (updatedNote != null) {
-                        context
-                            .read<NoteBloc>()
-                            .add(NoteUpdateEvent(updatedNote));
-
-                        setState(() {
-                          state.notes[state.notes.indexOf(note)] = updatedNote;
-                        });
-                      }
-                    });
-                  },
+                  onTap: () => _navigateToSecondPage(note),
                   child: Container(
                     padding: const EdgeInsets.all(8.0),
                     margin: const EdgeInsets.all(8.0),
@@ -130,15 +104,18 @@ class ToDoListState extends State<ToDoList> {
                       title: Text(
                         note.title,
                         style: const TextStyle(
-                            color: Colors.black,
-                            fontSize: 20.0,
-                            fontWeight: FontWeight.w600),
+                          color: Colors.black,
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                       subtitle: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            formatter.format(note.date),
+                            AppDateFormatter.dayMonthYear.format(
+                              DateTime.now(),
+                            ),
                           ),
                           const SizedBox(height: 8.0),
                           Text(
@@ -153,75 +130,28 @@ class ToDoListState extends State<ToDoList> {
                 );
               },
             ),
-            floatingActionButton: FloatingActionButton(
-              backgroundColor: Colors.white,
-              onPressed: () {
-                showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    String newNoteTitle = '';
-                    String newNoteContent = '';
-                    return AlertDialog(
-                      title: const Text('Новая заметка'),
-                      content: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: SingleChildScrollView(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              TextField(
-                                onChanged: (value) {
-                                  newNoteTitle = value;
-                                },
-                                decoration: InputDecoration(
-                                  hintText: 'Введите название заметки',
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(5.0),
-                                  ),
-                                ),
-                              ),
-                              SizedBox(height: 10.0),
-                              TextField(
-                                style: const TextStyle(height: 1.4),
-                                maxLines: 11,
-                                onChanged: (content) {
-                                  newNoteContent = content;
-                                },
-                                decoration: const InputDecoration(
-                                    enabledBorder: InputBorder.none,
-                                    border: InputBorder.none,
-                                    hintText: 'Введите текст заметки'),
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                      actions: [
-                        TextButton(
-                            onPressed: () async {
-                              final newNote = Note(
-                                title: newNoteTitle,
-                                content: newNoteContent,
-                                noteId: const Uuid().v4(),
-                              );
-                              context
-                                  .read<NoteBloc>()
-                                  .add(NoteAddEvent(newNote));
-                              Navigator.of(context).pop();
-                            },
-                            child: const Text('Добавить'))
-                      ],
-                    );
-                  },
-                );
-              },
-              child: const Icon(
-                Icons.edit_note_outlined,
-                color: Colors.orange,
-              ),
-            ),
+            floatingActionButton: const FloatButtonDialog(),
           ),
         );
+      },
+    );
+  }
+
+  void _navigateToSecondPage(Note note) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => SecondPage(
+          noteTitle: note.title,
+          noteContent: note.content,
+          noteId: note.noteId,
+        ),
+      ),
+    ).then(
+      (updatedNote) {
+        if (updatedNote != null) {
+          context.read<NoteBloc>().add(NoteUpdateEvent(updatedNote));
+        }
       },
     );
   }

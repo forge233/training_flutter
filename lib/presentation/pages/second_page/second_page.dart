@@ -9,12 +9,12 @@ class SecondPage extends StatefulWidget {
   final String noteContent;
   final String noteId;
 
-  const SecondPage(
-      {Key? key,
-      required this.noteTitle,
-      required this.noteContent,
-      required this.noteId})
-      : super(key: key);
+  const SecondPage({
+    Key? key,
+    required this.noteTitle,
+    required this.noteContent,
+    required this.noteId,
+  }) : super(key: key);
 
   @override
   State<SecondPage> createState() => _SecondPageState();
@@ -35,24 +35,14 @@ class _SecondPageState extends State<SecondPage> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        final updateNote = Note(
-            title: _titleController.text,
-            content: _contentController.text,
-            noteId: widget.noteId);
-        Navigator.of(context).pop(updateNote);
+        _navigateToHomePage();
         return true;
       },
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.white,
           leading: IconButton(
-            onPressed: () {
-              final updateNote = Note(
-                  title: _titleController.text,
-                  content: _contentController.text,
-                  noteId: widget.noteId);
-              Navigator.of(context).pop(updateNote);
-            },
+            onPressed: _navigateToHomePage,
             icon: const Icon(Icons.arrow_back),
           ),
           iconTheme: const IconThemeData(color: Colors.black),
@@ -60,47 +50,48 @@ class _SecondPageState extends State<SecondPage> {
             IconButton(
               onPressed: () async {
                 await showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                        title: const Text('Редактирование'),
-                        content: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const SizedBox(height: 16.0),
-                            TextFormField(
-                              controller: _titleController,
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: const Text('Редактирование'),
+                      content: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const SizedBox(height: 16.0),
+                          TextFormField(
+                            controller: _titleController,
+                            decoration: const InputDecoration(
+                              border: UnderlineInputBorder(),
+                              labelText: 'Заголовок',
+                            ),
+                            style: const TextStyle(fontSize: 20.0),
+                          ),
+                          const SizedBox(height: 16.0),
+                          Expanded(
+                            child: TextFormField(
+                              controller: _contentController,
+                              expands: true,
+                              maxLines: null,
+                              minLines: null,
                               decoration: const InputDecoration(
-                                border: UnderlineInputBorder(),
-                                labelText: 'Заголовок',
-                              ),
-                              style: const TextStyle(fontSize: 20.0),
-                            ),
-                            const SizedBox(height: 16.0),
-                            Expanded(
-                              child: TextFormField(
-                                controller: _contentController,
-                                expands: true,
-                                maxLines: null,
-                                minLines: null,
-                                decoration: const InputDecoration(
-                                  border: InputBorder.none,
-                                  labelText: 'Текст заметки',
-                                ),
+                                border: InputBorder.none,
+                                labelText: 'Текст заметки',
                               ),
                             ),
-                          ],
-                        ),
-                        actions: [
-                          TextButton(
-                              onPressed: () {
-                                setState(() {});
-                                Navigator.of(context).pop();
-                              },
-                              child: const Text('Сохранить'))
+                          ),
                         ],
-                      );
-                    });
+                      ),
+                      actions: [
+                        TextButton(
+                            onPressed: () {
+                              setState(() {});
+                              Navigator.of(context).pop();
+                            },
+                            child: const Text('Сохранить'))
+                      ],
+                    );
+                  },
+                );
               },
               icon: const Icon(Icons.edit),
             ),
@@ -108,7 +99,7 @@ class _SecondPageState extends State<SecondPage> {
               onPressed: () async {
                 BlocProvider.of<NoteBloc>(context)
                     .add(NoteDeleteEvent(widget.noteId));
-                updateNotesList();
+                Navigator.of(context).pop();
               },
               icon: const Icon(Icons.delete),
             )
@@ -121,13 +112,12 @@ class _SecondPageState extends State<SecondPage> {
               Text(
                 _titleController.text,
                 style: const TextStyle(
-                    color: Colors.grey,
-                    fontSize: 26.0,
-                    fontWeight: FontWeight.w600),
+                  color: Colors.grey,
+                  fontSize: 26.0,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
-              const SizedBox(
-                height: 10.0,
-              ),
+              const SizedBox(height: 10.0),
               Text(
                 _contentController.text,
                 style: const TextStyle(color: Colors.black, fontSize: 20.0),
@@ -139,7 +129,12 @@ class _SecondPageState extends State<SecondPage> {
     );
   }
 
-  void updateNotesList() {
-    Navigator.of(context).pushNamedAndRemoveUntil('/', (route) => false);
+  void _navigateToHomePage() {
+    final infoNote = Note(
+      title: _titleController.text,
+      content: _contentController.text,
+      noteId: widget.noteId,
+    );
+    Navigator.of(context).pop(infoNote);
   }
 }

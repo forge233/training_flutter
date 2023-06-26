@@ -6,6 +6,8 @@ class NoteAddEvent extends NoteEvent {
   final Note note;
 
   NoteAddEvent(this.note);
+
+  List<Object?> get props => [note];
 }
 
 class NoteUpdateEvent extends NoteEvent {
@@ -20,4 +22,10 @@ class NoteDeleteEvent extends NoteEvent {
   final String noteId;
 
   NoteDeleteEvent(this.noteId);
+
+  List<Object?> get props => [noteId];
 }
+
+class NoteSortDateEvent extends NoteEvent {}
+
+class NoteSortTitleEvent extends NoteEvent {}

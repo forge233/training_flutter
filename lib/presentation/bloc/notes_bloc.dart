@@ -11,11 +11,14 @@ class NoteBloc extends Bloc<NoteEvent, NoteState> {
     on<NoteAddEvent>(onAddNote);
     on<NoteUpdateEvent>(onUpdateNote);
     on<NoteDeleteEvent>(onDeleteNote);
+    on<NoteSortDateEvent>(onSortNoteDate);
+    on<NoteSortTitleEvent>(onSortNoteTitle);
   }
 
   void onAddNote(NoteAddEvent event, Emitter<NoteState> emit) {
-    notes.add(event.note);
-    emit(state.copyWith(notes: notes));
+    final addNotes = List<Note>.from(state.notes);
+    addNotes.add(event.note);
+    emit(state.copyWith(notes: addNotes));
   }
 
   void onUpdateNote(NoteUpdateEvent event, Emitter<NoteState> emit) {
@@ -29,11 +32,20 @@ class NoteBloc extends Bloc<NoteEvent, NoteState> {
   }
 
   void onDeleteNote(NoteDeleteEvent event, Emitter<NoteState> emit) {
-    notes.removeWhere((note) => note.noteId == event.noteId);
-    emit(state.copyWith(notes: notes));
+    final deleteNotes = List<Note>.from(state.notes);
+    deleteNotes.removeWhere((note) => note.noteId == event.noteId);
+    emit(state.copyWith(notes: deleteNotes));
   }
 
-  Note getNoteById(String noteId) {
-    return state.notes.firstWhere((note) => note.noteId == noteId);
+  void onSortNoteDate(NoteSortDateEvent event, Emitter<NoteState> emit) {
+    final sortNoteDate = List<Note>.from(state.notes);
+    sortNoteDate.sort((a, b) => a.date.compareTo(b.date));
+    emit(state.copyWith(notes: sortNoteDate));
+  }
+
+  void onSortNoteTitle(NoteSortTitleEvent event, Emitter<NoteState> emit) {
+    final sortNoteTime = List<Note>.from(state.notes);
+    sortNoteTime.sort((a, b) => b.title.compareTo(a.title));
+    emit(state.copyWith(notes: sortNoteTime));
   }
 }
