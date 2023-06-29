@@ -29,3 +29,5 @@ class NoteDeleteEvent extends NoteEvent {
 class NoteSortDateEvent extends NoteEvent {}
 
 class NoteSortTitleEvent extends NoteEvent {}
+
+class NoteLoadDataEvent extends NoteEvent {}

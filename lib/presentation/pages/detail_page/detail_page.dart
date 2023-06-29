@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:to_do_list_from_bloc/application/storage/storage.dart';
 import 'package:to_do_list_from_bloc/presentation/bloc/notes_bloc.dart';
 import 'package:to_do_list_from_bloc/presentation/bloc/notes_event.dart';
 import 'package:to_do_list_from_bloc/presentation/navigation/model_arguments/models.dart';
@@ -97,6 +98,7 @@ class _DetailPageState extends State<DetailPage> {
             ),
             IconButton(
               onPressed: () async {
+                DeviceStorage.removeData();
                 BlocProvider.of<NoteBloc>(context)
                     .add(NoteDeleteEvent(widget.noteId));
                 Navigator.of(context).pop();

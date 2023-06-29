@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:uuid/uuid.dart';
 
+import '../../../../application/storage/storage.dart';
 import '../../../bloc/notes_bloc.dart';
 import '../../../bloc/notes_event.dart';
 import '../../../navigation/model_arguments/models.dart';
@@ -29,6 +30,12 @@ class _FloatButtonDialogState extends State<FloatButtonDialog> {
     titleController.dispose();
     contentController.dispose();
     super.dispose();
+  }
+
+  @override
+  void didChangeDependencies() async {
+    await DeviceStorage.loadData();
+    super.didChangeDependencies();
   }
 
   @override
@@ -74,16 +81,21 @@ class _FloatButtonDialogState extends State<FloatButtonDialog> {
               ),
               actions: [
                 TextButton(
-                    onPressed: () async {
-                      final newNote = Note(
-                        title: titleController.text,
-                        content: contentController.text,
-                        noteId: const Uuid().v4(),
-                      );
-                      context.read<NoteBloc>().add(NoteAddEvent(newNote));
-                      Navigator.of(context).pop();
-                    },
-                    child: const Text('Добавить'))
+                  onPressed: () async {
+                    final newNote = Note(
+                      title: titleController.text,
+                      content: contentController.text,
+                      noteId: const Uuid().v4(),
+                    );
+                    final noteBloc = context.read<NoteBloc>();
+                    noteBloc.add(NoteAddEvent(newNote));
+                    await DeviceStorage.saveData(noteBloc.state.notes);
+                    Navigator.of(context).pop();
+                  },
+                  child: const Text('Добавить'),
+                )
+
+
               ],
             );
           },

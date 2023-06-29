@@ -7,6 +7,7 @@ import 'package:to_do_list_from_bloc/presentation/navigation/model_arguments/mod
 import 'package:to_do_list_from_bloc/presentation/bloc/notes_event.dart';
 import 'package:to_do_list_from_bloc/presentation/bloc/notes_state.dart';
 
+import '../../../application/storage/storage.dart';
 import '../detail_page/detail_page.dart';
 
 class ToDoList extends StatefulWidget {
@@ -138,7 +139,7 @@ class ToDoListState extends State<ToDoList> {
     );
   }
 
-  void _navigateToSecondPage(Note note) {
+  Future<void> _navigateToSecondPage(Note note) async {
     Navigator.push(
       context,
       MaterialPageRoute(
@@ -148,12 +149,12 @@ class ToDoListState extends State<ToDoList> {
           noteId: note.noteId,
         ),
       ),
-    ).then(
-      (updatedNote) {
-        if (updatedNote != null) {
-          context.read<NoteBloc>().add(NoteUpdateEvent(updatedNote));
-        }
-      },
-    );
+    ).then((updatedNote) {
+      if (updatedNote != null) {
+        context.read<NoteBloc>().add(NoteUpdateEvent(updatedNote));
+        DeviceStorage.saveData(context.read<NoteBloc>().state.notes);
+      }
+    });
   }
+
 }

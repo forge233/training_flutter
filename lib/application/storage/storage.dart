@@ -1,18 +1,30 @@
+import 'dart:convert';
+
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../presentation/navigation/model_arguments/models.dart';
+
 class DeviceStorage {
-  void saveData(String title, String content, String id) async {
+  static Future<void> saveData(List<Note> notes) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString('title', title);
-    await prefs.setString('content', content);
-    await prefs.setString('id', id);
+    String notesJson = jsonEncode(notes.map((note) => note.toJson()).toList());
+    await prefs.setString('noteData', notesJson);
   }
 
-  Future<Map<String, String>> loadData() async {
+  static Future<List<Note>> loadData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    String title = prefs.getString('title') ?? '';
-    String content = prefs.getString('content') ?? '';
-    String id = prefs.getString('id') ?? '';
-    return {'title': title, 'content': content, 'id': id};
+    String? notesJson = prefs.getString('noteData');
+    if (notesJson != null) {
+      List<dynamic> notesData = jsonDecode(notesJson);
+      List<Note> notes = Note.fromJsonList(notesData);
+      print('Loaded notes: $notes'); // Отладочный вывод
+      return notes;
+    }
+    return [];
+  }
+
+  static Future<void> removeData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.remove('noteData');
   }
 }
