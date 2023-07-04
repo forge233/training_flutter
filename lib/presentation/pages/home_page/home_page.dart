@@ -4,8 +4,8 @@ import 'package:photo_album/application/dot/result.dart';
 import 'package:photo_album/presentation/bloc/photo_state.dart';
 import 'package:photo_album/presentation/pages/detail_page/detail_page.dart';
 
-import '../../bloc/photo_bloc.dart';
-import '../../bloc/photo_event.dart';
+import '../../bloc/photo_bloc.dart';///TODO повний шлях
+import '../../bloc/photo_event.dart';///TODO повний шлях
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -20,7 +20,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    final photoBloc = BlocProvider.of<PhotoBloc>(context);
+    final photoBloc = BlocProvider.of<PhotoBloc>(context);///TODO на що записувати в змінну ?
     photoBloc.add(FetchPhotoDataEvent());
   }
 
