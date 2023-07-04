@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:photo_album/application/dot/result.dart';
 
 class DetailPage extends StatelessWidget {
   final String imageUrl;

@@ -46,17 +46,20 @@ class _HomePageState extends State<HomePage> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      InkWell(
-                        onTap: () {
-                          _navigateToSecondPage(result);
-                        },
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(14.0),
-                          child: Image.network(
-                            result.urls.thumb,
-                            width: 400,
-                            height: 250,
-                            fit: BoxFit.cover,
+                      Hero(
+                        tag: result.photo.id,
+                        child: InkWell(
+                          onTap: () {
+                            _navigateToSecondPage(result);
+                          },
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(14.0),
+                            child: Image.network(
+                              result.urls.thumb,
+                              width: 400,
+                              height: 250,
+                              fit: BoxFit.cover,
+                            ),
                           ),
                         ),
                       ),
