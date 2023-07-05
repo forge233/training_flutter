@@ -29,6 +29,8 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   flutter_bloc: ^7.0.0
+  cached_network_image: ^3.2.3
+  path_provider: ^2.0.15
   json_annotation: ^4.0.1
   json_serializable: ^4.1.4
   http: ^0.13.5

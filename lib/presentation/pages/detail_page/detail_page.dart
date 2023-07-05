@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:photo_album/application/dot/result.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class DetailPage extends StatelessWidget {
   final String imageUrl;
   final String altDescription;
   final String description;
   final String bio;
+  final String heroId;
 
   const DetailPage({
     Key? key,
@@ -13,6 +14,7 @@ class DetailPage extends StatelessWidget {
     required this.altDescription,
     required this.description,
     required this.bio,
+    required this.heroId,
   }) : super(key: key);
 
   @override
@@ -25,15 +27,38 @@ class DetailPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Image.network(imageUrl),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(altDescription,
-                    style: const TextStyle(color: Colors.white)),
+              Hero(
+                tag: heroId,
+                child: Material(
+                  type: MaterialType.transparency,
+                  child: Container(
+                    width: 400,
+                    height: 250,
+                    child: CachedNetworkImage(
+                      imageUrl: imageUrl,
+                      fit: BoxFit.cover,
+                      placeholder: (context, url) => const Center(
+                        child: CircularProgressIndicator(color: Colors.grey),
+                      ),
+                      errorWidget: (context, url, error) =>
+                          const Icon(Icons.error),
+                    ),
+                  ),
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text(bio, style: const TextStyle(color: Colors.white)),
+                child: Text(
+                  altDescription,
+                  style: const TextStyle(color: Colors.white),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  bio,
+                  style: const TextStyle(color: Colors.white),
+                ),
               ),
             ],
           ),

@@ -20,8 +20,7 @@ class AppRoutes {
             altDescription: arguments,
             bio: arguments,
             description: arguments,
-
-
+            heroId: arguments,
           ),
         );
       default:
