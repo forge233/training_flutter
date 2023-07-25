@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../application/dot/result.dart';
-import '../../bloc/exchange_bloc.dart';
-import '../../bloc/exchange_event.dart';
-import '../../bloc/exchange_state.dart';
+import 'package:exchange_currency/application/dot/result.dart';
+import 'package:exchange_currency/presentation/bloc/exchange_bloc.dart';
+import 'package:exchange_currency/presentation/bloc/exchange_event.dart';
+import 'package:exchange_currency/presentation/bloc/exchange_state.dart';
 import '../setting_page/setting_page.dart';
 
 class HomePage extends StatefulWidget {
@@ -53,6 +53,7 @@ class _HomePageState extends State<HomePage> {
                       builder: (context) => SettingPage(
                         currencies: results,
                         currencyVisibility: currencyVisibility,
+                        updateCurrencyVisibility: _updateCurrencyVisibility,
                       ),
                     ),
                   );
@@ -62,10 +63,7 @@ class _HomePageState extends State<HomePage> {
                     });
                   }
                 },
-                icon: const Icon(
-                  Icons.settings,
-                  color: Colors.white,
-                ),
+                icon: const Icon(Icons.settings, color: Colors.white),
               )
             ],
           ),
@@ -90,9 +88,7 @@ class _HomePageState extends State<HomePage> {
                     Result result = results[index];
                     bool isVisible = currencyVisibility[index];
                     if (!isVisible) {
-                      return const Center(
-                          child:
-                              CircularProgressIndicator(color: Colors.black));
+                      return Container();
                     }
                     return Padding(
                       padding: const EdgeInsets.all(10.0),
@@ -130,5 +126,11 @@ class _HomePageState extends State<HomePage> {
         );
       },
     );
+  }
+
+  void _updateCurrencyVisibility(int index, bool isVisible) {
+    setState(() {
+      currencyVisibility[index] = isVisible;
+    });
   }
 }

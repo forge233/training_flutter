@@ -1,12 +1,12 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import '../application/dot/currency.dart';
-import '../application/dot/result.dart';
+import 'package:exchange_currency/application/dot/currency.dart';
+import 'package:exchange_currency/application/dot/result.dart';
 
 class ServiceJson {
   static Future<List<Result>> fetchDataToDto() async {
-    String url = 'https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json';
-
+    String url =
+        'https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json';
 
     final response = await http.get(Uri.parse(url));
     final responseData = json.decode(response.body);

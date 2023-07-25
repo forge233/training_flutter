@@ -15,3 +15,6 @@ class CurrencyReordered extends ExchangeEvent {
 
   CurrencyReordered(this.oldIndex, this.newIndex);
 }
+
+class CurrencyLoadDataVisibility extends ExchangeEvent {}
+class CurrencyLoadDataOrdered extends ExchangeEvent {}

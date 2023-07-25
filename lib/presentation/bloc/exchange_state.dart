@@ -13,6 +13,7 @@ class ExchangeState {
       : exchangeState = [],
         exchangeVisible = true;
 
+
   ExchangeState copyWith({
     List<Result>? exchangeState,
     bool? exchangeVisible,

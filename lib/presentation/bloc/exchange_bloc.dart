@@ -1,7 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:exchange_currency/application/dot/result.dart';
 
-import '../service.dart';
+import 'package:exchange_currency/presentation/service.dart';
+import '../../application/storage/storage.dart';
 import 'exchange_event.dart';
 import 'exchange_state.dart';
 
@@ -10,6 +11,7 @@ class ExchangeBloc extends Bloc<ExchangeEvent, ExchangeState> {
     on<FetchData>(_fetchExchangeCurrencyData);
     on<CurrencyVisibilityChanged>(_handleCurrencyVisibilityChanged);
     on<CurrencyReordered>(_handleCurrencyReordered);
+    on<CurrencyLoadDataVisibility>(onLoadDataVisibility);
   }
 
   void _fetchExchangeCurrencyData(
@@ -19,10 +21,10 @@ class ExchangeBloc extends Bloc<ExchangeEvent, ExchangeState> {
   }
 
   void _handleCurrencyVisibilityChanged(
-      CurrencyVisibilityChanged event, Emitter<ExchangeState> emit) {
-    bool updatedVisibility = event.isVisible;
-    print(updatedVisibility);
-    emit(state.copyWith(exchangeVisible: updatedVisibility));
+    CurrencyVisibilityChanged event,
+    Emitter<ExchangeState> emit,
+  ) {
+    emit(state.copyWith(exchangeVisible: event.isVisible));
   }
 
   void _handleCurrencyReordered(
@@ -46,5 +48,14 @@ class ExchangeBloc extends Bloc<ExchangeEvent, ExchangeState> {
       exchangeState: updatedCurrencies,
       exchangeVisible: updatedVisibility,
     ));
+  }
+
+  void onLoadDataVisibility(
+    CurrencyLoadDataVisibility event,
+    Emitter<ExchangeState> emit,
+  ) async {
+    bool currencyVisibility = await DeviceStorage.loadCurrencyVisibility();
+    print('bloc: $currencyVisibility');
+    emit(state.copyWith(exchangeVisible: currencyVisibility));
   }
 }

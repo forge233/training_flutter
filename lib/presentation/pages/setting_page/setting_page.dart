@@ -1,18 +1,21 @@
+import 'package:exchange_currency/application/storage/storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../application/dot/result.dart';
-import '../../bloc/exchange_bloc.dart';
-import '../../bloc/exchange_event.dart';
-import '../../bloc/exchange_state.dart';
+import 'package:exchange_currency/application/dot/result.dart';
+import 'package:exchange_currency/presentation/bloc/exchange_bloc.dart';
+import 'package:exchange_currency/presentation/bloc/exchange_event.dart';
+import 'package:exchange_currency/presentation/bloc/exchange_state.dart';
 
 class SettingPage extends StatefulWidget {
   final List<Result> currencies;
   final List<bool> currencyVisibility;
+  final Function(int, bool) updateCurrencyVisibility;
 
   const SettingPage({
     Key? key,
     required this.currencies,
     required this.currencyVisibility,
+    required this.updateCurrencyVisibility,
   }) : super(key: key);
 
   @override
@@ -50,7 +53,6 @@ class _SettingPageState extends State<SettingPage> {
               itemBuilder: (context, index) {
                 final currency = currencies[index];
                 final isVisible = currencyVisibility[index];
-
                 return Padding(
                   key: ValueKey(currency.currencyData.cc),
                   padding: const EdgeInsets.all(10.0),
@@ -74,10 +76,9 @@ class _SettingPageState extends State<SettingPage> {
                               value: isVisible,
                               onChanged: (newValue) {
                                 _toggleCurrencyVisibility(
-                                  context,
-                                  index,
-                                  newValue,
-                                );
+                                    context, index, newValue);
+                                widget.updateCurrencyVisibility(
+                                    index, newValue);
                               },
                             ),
                           ),
@@ -103,35 +104,37 @@ class _SettingPageState extends State<SettingPage> {
   }
 
   void _toggleCurrencyVisibility(
-      BuildContext context,
-      int index,
-      bool isVisible,
-      ) {
+      BuildContext context, int index, bool isVisible) {
+    print('is Visible: $isVisible');
     context.read<ExchangeBloc>().add(
-      CurrencyVisibilityChanged(index, isVisible),
-    );
+          CurrencyVisibilityChanged(index, isVisible),
+        );
 
     setState(() {
-      currencyVisibility = List.from(currencyVisibility);
       currencyVisibility[index] = isVisible;
     });
+    DeviceStorage.saveCurrencyVisibility(isVisible);
   }
 
   void _handleCurrencyReorder(
-      BuildContext context,
-      int oldIndex,
-      int newIndex,
-      ) {
+    BuildContext context,
+    int oldIndex,
+    int newIndex,
+  ) {
     setState(() {
       final currency = currencies.removeAt(oldIndex);
-      currencies.insert(newIndex > oldIndex ? newIndex - 1 : newIndex, currency);
+      currencies.insert(
+          newIndex > oldIndex ? newIndex - 1 : newIndex, currency);
 
       final visibility = currencyVisibility.removeAt(oldIndex);
-      currencyVisibility.insert(newIndex > oldIndex ? newIndex - 1 : newIndex, visibility);
+      currencyVisibility.insert(
+          newIndex > oldIndex ? newIndex - 1 : newIndex, visibility);
     });
 
     context.read<ExchangeBloc>().add(
-      CurrencyReordered(oldIndex, newIndex > oldIndex ? newIndex - 1 : newIndex),
-    );
+          CurrencyReordered(
+              oldIndex, newIndex > oldIndex ? newIndex - 1 : newIndex),
+        );
+    DeviceStorage.saveCurrencyOrder(newIndex);
   }
 }
