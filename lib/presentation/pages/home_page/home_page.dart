@@ -14,27 +14,20 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List<Result> results = [];
-  List<bool> currencyVisibility = [];
-  String commonDate = '';
-
   @override
   void initState() {
     super.initState();
     BlocProvider.of<ExchangeBloc>(context).add(FetchData());
   }
 
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ExchangeBloc, ExchangeState>(
       builder: (BuildContext context, state) {
-        results = state.exchangeState;
-        if (currencyVisibility.isEmpty) {
-          currencyVisibility = List<bool>.filled(results.length, true);
-        }
-        if (results.isNotEmpty) {
-          commonDate = results[0].currencyData.exchangedate;
-        }
+        print("State: $state");
+        print("exchangeState: ${state.exchangeState}");
+        print("exchangeVisible: ${state.exchangeVisible}");
         return Scaffold(
           appBar: AppBar(
             backgroundColor: Colors.grey,
@@ -47,21 +40,15 @@ class _HomePageState extends State<HomePage> {
             actions: [
               IconButton(
                 onPressed: () async {
-                  final updatedVisibility = await Navigator.push(
+                  await Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (context) => SettingPage(
-                        currencies: results,
-                        currencyVisibility: currencyVisibility,
-                        updateCurrencyVisibility: _updateCurrencyVisibility,
+                        currencies: state.exchangeState,
+                        currencyVisibility: state.exchangeVisible,
                       ),
                     ),
                   );
-                  if (updatedVisibility != null) {
-                    setState(() {
-                      currencyVisibility = updatedVisibility;
-                    });
-                  }
                 },
                 icon: const Icon(Icons.settings, color: Colors.white),
               )
@@ -70,25 +57,26 @@ class _HomePageState extends State<HomePage> {
           body: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Align(
-                  alignment: Alignment.centerRight,
-                  child: Text(
-                    commonDate,
-                    style: const TextStyle(color: Colors.black, fontSize: 15),
+              if (state.exchangeState.isNotEmpty)
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Align(
+                    alignment: Alignment.centerRight,
+                    child: Text(
+                      state.exchangeState.first.currencyData.exchangedate,
+                      style: const TextStyle(color: Colors.black, fontSize: 15),
+                    ),
                   ),
                 ),
-              ),
               Expanded(
                 child: ListView.builder(
                   physics: const BouncingScrollPhysics(),
-                  itemCount: results.length,
+                  itemCount: state.exchangeVisible.length,
                   itemBuilder: (context, index) {
-                    Result result = results[index];
-                    bool isVisible = currencyVisibility[index];
+                    Result result = state.exchangeState[index];
+                    bool isVisible = state.exchangeVisible[index];
                     if (!isVisible) {
-                      return Container();
+                      return const SizedBox();
                     }
                     return Padding(
                       padding: const EdgeInsets.all(10.0),
@@ -126,11 +114,5 @@ class _HomePageState extends State<HomePage> {
         );
       },
     );
-  }
-
-  void _updateCurrencyVisibility(int index, bool isVisible) {
-    setState(() {
-      currencyVisibility[index] = isVisible;
-    });
   }
 }
