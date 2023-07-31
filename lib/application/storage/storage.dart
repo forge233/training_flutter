@@ -1,8 +1,4 @@
-import 'dart:convert';
-
 import 'package:shared_preferences/shared_preferences.dart';
-
-import '../dot/result.dart';
 
 class DeviceStorage {
   static const String _visibilityKey = 'currencyVisibility';
@@ -25,7 +21,6 @@ class DeviceStorage {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     List<String>? visibility = prefs.getStringList(_visibilityKey);
     List<bool> parsedVisibility = [];
-
     if (visibility != null) {
       for (String element in visibility) {
         if (element == '1') {
@@ -39,7 +34,6 @@ class DeviceStorage {
   }
 
   static Future<void> saveCurrencyOrder(List<String> currencyOrder) async {
-    print("Saving currency order: $currencyOrder");
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setStringList(_orderKey, currencyOrder);
   }
@@ -48,7 +42,6 @@ class DeviceStorage {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     List<String>? orderStringList = prefs.getStringList(_orderKey);
     List<String> order = orderStringList ?? [];
-    print("Loaded currency order: $order");
     return order;
   }
 }

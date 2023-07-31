@@ -1,4 +1,4 @@
-import '../../application/dot/result.dart';
+import 'package:exchange_currency/application/dot/result.dart';
 
 class ExchangeState {
   final List<Result> exchangeState;

@@ -1,8 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:exchange_currency/application/dot/result.dart';
-
 import 'package:exchange_currency/presentation/service.dart';
-import '../../application/storage/storage.dart';
+import 'package:exchange_currency/application/storage/storage.dart';
 import 'exchange_event.dart';
 import 'exchange_state.dart';
 
@@ -19,13 +18,22 @@ class ExchangeBloc extends Bloc<ExchangeEvent, ExchangeState> {
     List<bool> currencyVisibility =
         await DeviceStorage.loadCurrencyVisibility();
     List<String> reorderCurrency = await DeviceStorage.loadCurrencyOrder();
-    print("Loaded currency order: $reorderCurrency");
+    List<Result> sortedResults = List<Result>.empty(growable: true);
+    for (String currencyCode in reorderCurrency) {
+      Result? result = fetchedResults
+          .firstWhere((result) => result.currencyData.cc == currencyCode);
+      sortedResults.add(result);
+    }
+    for (Result result in fetchedResults) {
+      if (!reorderCurrency.contains(result.currencyData.cc)) {
+        sortedResults.add(result);
+      }
+    }
     List<bool> initialVisible = currencyVisibility.isNotEmpty
         ? currencyVisibility
-        : List<bool>.filled(fetchedResults.length, true);
-
+        : List<bool>.filled(sortedResults.length, true);
     emit(state.copyWith(
-      exchangeState: fetchedResults,
+      exchangeState: sortedResults,
       exchangeVisible: initialVisible,
       exchangeReordered: reorderCurrency,
     ));
@@ -42,35 +50,28 @@ class ExchangeBloc extends Bloc<ExchangeEvent, ExchangeState> {
   }
 
   void _handleCurrencyReordered(
-      CurrencyReordered event,
-      Emitter<ExchangeState> emit,
-      ) {
+    CurrencyReordered event,
+    Emitter<ExchangeState> emit,
+  ) {
     if (event.oldIndex == event.newIndex ||
         state.exchangeState.isEmpty ||
         event.oldIndex >= state.exchangeState.length ||
         event.newIndex >= state.exchangeState.length) {
       return;
     }
-
     List<Result> updatedCurrencies = List<Result>.from(state.exchangeState);
     List<bool> updatedVisibility = List<bool>.from(state.exchangeVisible);
-
     if (event.oldIndex >= 0 &&
         event.oldIndex < updatedCurrencies.length &&
         event.newIndex >= 0 &&
         event.newIndex < updatedCurrencies.length) {
       final currency = updatedCurrencies.removeAt(event.oldIndex);
       updatedCurrencies.insert(event.newIndex, currency);
-
       final isVisible = updatedVisibility.removeAt(event.oldIndex);
       updatedVisibility.insert(event.newIndex, isVisible);
-
       List<String> currencyOrder =
-      updatedCurrencies.map((result) => result.currencyData.cc).toList();
-      print("Currency order to save: $currencyOrder");
-
+          updatedCurrencies.map((result) => result.currencyData.cc).toList();
       DeviceStorage.saveCurrencyOrder(currencyOrder);
-
       emit(state.copyWith(
         exchangeState: updatedCurrencies,
         exchangeVisible: updatedVisibility,
@@ -78,5 +79,4 @@ class ExchangeBloc extends Bloc<ExchangeEvent, ExchangeState> {
       ));
     }
   }
-
 }

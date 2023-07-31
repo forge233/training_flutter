@@ -4,7 +4,7 @@ import 'package:exchange_currency/application/dot/result.dart';
 import 'package:exchange_currency/presentation/bloc/exchange_bloc.dart';
 import 'package:exchange_currency/presentation/bloc/exchange_event.dart';
 import 'package:exchange_currency/presentation/bloc/exchange_state.dart';
-import '../setting_page/setting_page.dart';
+import 'package:exchange_currency/presentation/pages/setting_page/setting_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -20,14 +20,10 @@ class _HomePageState extends State<HomePage> {
     BlocProvider.of<ExchangeBloc>(context).add(FetchData());
   }
 
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ExchangeBloc, ExchangeState>(
       builder: (BuildContext context, state) {
-        print("State: $state");
-        print("exchangeState: ${state.exchangeState}");
-        print("exchangeVisible: ${state.exchangeVisible}");
         return Scaffold(
           appBar: AppBar(
             backgroundColor: Colors.grey,
@@ -63,9 +59,9 @@ class _HomePageState extends State<HomePage> {
                   child: Align(
                     alignment: Alignment.centerRight,
                     child: Text(
-                      state.exchangeState.first.currencyData.exchangedate,
-                      style: const TextStyle(color: Colors.black, fontSize: 15),
-                    ),
+                        state.exchangeState.first.currencyData.exchangedate,
+                        style:
+                            const TextStyle(color: Colors.black, fontSize: 15)),
                   ),
                 ),
               Expanded(
@@ -83,24 +79,20 @@ class _HomePageState extends State<HomePage> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            result.currencyData.cc,
-                            style: const TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.w600),
-                          ),
+                          Text(result.currencyData.cc,
+                              style: const TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w600)),
                           const SizedBox(height: 4),
                           Row(
                             children: [
                               Column(
-                                children: [
-                                  Text(result.currencyData.txt),
-                                ],
+                                children: [Text(result.currencyData.txt)],
                               ),
                               Expanded(
-                                child: Text(result.currencyData.rate.toString(),
-                                    textAlign: TextAlign.right),
-                              ),
+                                  child: Text(
+                                      result.currencyData.rate.toString(),
+                                      textAlign: TextAlign.right)),
                             ],
                           ),
                         ],

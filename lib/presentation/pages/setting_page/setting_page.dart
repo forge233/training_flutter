@@ -102,7 +102,6 @@ class _SettingPageState extends State<SettingPage> {
 
   void _handleCurrencyReordered(
       BuildContext context, int oldIndex, int newIndex) async {
-    print("Reordering: $oldIndex -> $newIndex");
     context.read<ExchangeBloc>().add(
           CurrencyReordered(
               oldIndex, newIndex > oldIndex ? newIndex - 1 : newIndex),
